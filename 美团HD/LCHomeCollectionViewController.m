@@ -8,8 +8,18 @@
 
 #import "LCHomeCollectionViewController.h"
 #import "LCConst.h"
+#import "UIBarButtonItem+Extension.h"
+#import "UIView+Extension.h"
+#import "LCHomeTopItem.h"
+#import "LCCategoryViewController.h"
+#import "LCDistrictViewController.h"
 
 @interface LCHomeCollectionViewController ()
+
+@property (nonatomic, weak) UIBarButtonItem *categoryItem;
+@property (nonatomic, weak) UIBarButtonItem *districtItem;
+@property (nonatomic, weak) UIBarButtonItem *sortItem;
+
 
 @end
 
@@ -28,7 +38,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     
 //    self.view == self.collectionView.superview
-    
     self.collectionView.backgroundColor = LCGlobalBg;
     
     // Register cell classes
@@ -42,24 +51,65 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)setupLeftNav
 {
+    // 1、logo
+    UIBarButtonItem *logoTopItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_meituan_logo"] style:UIBarButtonItemStylePlain target:self action:nil];
+    logoTopItem.enabled = NO;//不是UI控件没有userInteractionEnable
     
+    //2、类别
+    LCHomeTopItem *categoryTopItem = [LCHomeTopItem item];
+    [categoryTopItem addTarget:self action:@selector(categoryClick)];
+    UIBarButtonItem *categoryItem = [[UIBarButtonItem alloc] initWithCustomView:categoryTopItem];
+    self.categoryItem = categoryItem;
+    
+    //3、地区
+    LCHomeTopItem *districtTopItem = [LCHomeTopItem item];
+    [districtTopItem addTarget:self action:@selector(districtClick)];
+    UIBarButtonItem *districtItem = [[UIBarButtonItem alloc] initWithCustomView:districtTopItem];
+    self.districtItem = districtItem;
+    
+    //4、排序
+    LCHomeTopItem *sortTopItem = [LCHomeTopItem item];
+    [sortTopItem addTarget:self action:@selector(sortClick)];
+    UIBarButtonItem *sortItem = [[UIBarButtonItem alloc] initWithCustomView:sortTopItem];
+    self.sortItem = sortItem;
+    
+    self.navigationItem.leftBarButtonItems = @[logoTopItem,categoryItem,districtItem,sortItem];
 }
 - (void)setupRightNav
 {
-//    UIBarButtonItem *mapItem = [[UIBarButtonItem alloc] initWithCustomView:<#(UIView *)#>]
-//    self.navigationItem.rightBarButtonItems =
+    UIBarButtonItem *mapItem = [UIBarButtonItem itemWithTarget:nil action:nil image:@"icon_map" highImage:@"icon_map_highlighted"];
+    UIBarButtonItem *searchItem = [UIBarButtonItem itemWithTarget:nil action:nil image:@"icon_search" highImage:@"icon_search_highlighted"];
+    mapItem.customView.width = 60;
+    searchItem.customView.width = 60;
+    self.navigationItem.rightBarButtonItems = @[mapItem,searchItem];
+}
+
+#pragma mark - 顶部item点击事件
+- (void)categoryClick
+{
+    //显示分类菜单
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[[LCCategoryViewController alloc] init]];
+    [popover presentPopoverFromBarButtonItem:self.categoryItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+- (void)districtClick
+{
+    //显示区域菜单
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[[LCDistrictViewController alloc] init]];
+    [popover presentPopoverFromBarButtonItem:self.districtItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+- (void)sortClick
+{
+    
 }
 
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete method implementation -- Return the number of sections
     return 0;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete method implementation -- Return the number of items in the section
     return 0;
 }
 
