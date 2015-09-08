@@ -8,11 +8,11 @@
 
 #import "LCDistrictViewController.h"
 #import "LCHomeDropView.h"
-#import "Masonry.h"
 #import "UIView+Extension.h"
 #import "LCCityViewController.h"
 #import "LCNavigationViewController.h"
 #import "LCRegion.h"
+#import "LCConst.h"
 
 @interface LCDistrictViewController ()<LCHomeDropViewDataSource, LCHomeDropViewDelegate>
 - (IBAction)changeCity;
@@ -39,6 +39,7 @@
 }
 
 
+#pragma mark -LCHomeDropViewDataSource
 - (NSInteger) numberOfRowsInMainTable:(LCHomeDropView *)homeDropView
 {
     return self.regions.count;
@@ -55,13 +56,20 @@
     return region.subregions;
 }
 
+
+#pragma mark - LCHomeDropViewDelegate
 - (void)homeDropView:(LCHomeDropView *)homeDropView didSelectRowInMainTable:(int)row
 {
-    
+    LCRegion *region = self.regions[row];
+    if (region.subregions.count == 0) {
+        [LCNotifiCationCenter postNotificationName:LCRegionDidChangeNotification object:self userInfo:@{LCRegionSelectKey:region}];
+    }
 }
 - (void)homeDropView:(LCHomeDropView *)homeDropView didSelectRowInSubTable:(int)row inMainTable:(int)mainRow
 {
-    
+    LCRegion *region = self.regions[mainRow];
+    NSString *subRegionName = region.subregions[row];
+    [LCNotifiCationCenter postNotificationName:LCRegionDidChangeNotification object:self userInfo:@{LCRegionSelectKey:region,LCSubRegionSelectKey:subRegionName}];
 }
 
 

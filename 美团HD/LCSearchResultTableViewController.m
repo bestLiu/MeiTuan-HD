@@ -73,13 +73,13 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [NSString stringWithFormat:@"共有%d个搜索结果",self.dataArray.count];
+    return [NSString stringWithFormat:@"共有%ld个搜索结果",self.dataArray.count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    LCCity *city = [LCTool cities][indexPath.row];
+    LCCity *city = self.dataArray[indexPath.row];
     [LCNotifiCationCenter postNotificationName:LCCityDidSelectNotification object:self userInfo:@{LCCitySelectCityKey:city.name}];
     
     [self dismissViewControllerAnimated:YES completion:nil];

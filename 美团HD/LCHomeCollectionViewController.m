@@ -18,6 +18,7 @@
 #import "LCCity.h"
 #import "LCSort.h"
 #import "LCCategory.h"
+#import "LCRegion.h"
 @interface LCHomeCollectionViewController ()
 
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
@@ -61,6 +62,9 @@ static NSString * const reuseIdentifier = @"Cell";
     
     //监听分类改变
     [LCNotifiCationCenter addObserver:self selector:@selector(categoryChange:) name:LCCategoryDidChangeNotification object:nil];
+    
+    //监听区域改变
+    [LCNotifiCationCenter addObserver:self selector:@selector(regionChange:) name:LCRegionDidChangeNotification object:nil];
     
     
     [self setupLeftNav];
@@ -119,16 +123,17 @@ static NSString * const reuseIdentifier = @"Cell";
     
     if (self.selectedCityName) {
     LCCity *city = [[[LCTool cities] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name = %@",self.selectedCityName]] firstObject];
+        
+        NSLog(@"city--->>>%@",city.regions);
     //获得当前选中城市的区域
     districtVc.regions = city.regions;
 
     }
         //显示区域菜单
-    LCDistrictViewController *disctrictVc = [[LCDistrictViewController alloc] init];
-    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:disctrictVc];
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:districtVc];
     [popover presentPopoverFromBarButtonItem:self.districtItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     self.regionPopover = popover;
-    disctrictVc.popover = popover;
+    districtVc.popover = popover;
 }
 - (void)sortClick
 {
@@ -164,13 +169,13 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // 1更换区域item的文字
     LCHomeTopItem *topItem = (LCHomeTopItem *)self.districtItem.customView;
-    [topItem setTitle:[NSString stringWithFormat:@"%@ - 全部",_selectedCityName]];
+    [topItem setTitle:[NSString stringWithFormat:@"%@",_selectedCityName]];
     [topItem setSubtitle:nil];
     
     
     // 2
 #warning TODO
-//    [self districtClick];
+
     
 }
 
@@ -206,7 +211,21 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.categoryPopover dismissPopoverAnimated:YES];
 }
 
-
+- (void)regionChange:(NSNotification *)noti
+{
+    LCRegion *region = noti.userInfo[LCRegionSelectKey];
+    NSString *subRegionName = noti.userInfo[LCSubRegionSelectKey];
+    
+    //改变顶部文字
+    LCHomeTopItem *topItem = (LCHomeTopItem *)self.districtItem.customView;
+    [topItem setTitle:[NSString stringWithFormat:@"%@ - %@",self.selectedCityName,region.name]];
+    [topItem setSubtitle:subRegionName];
+    
+    //刷新表格数据
+    
+    //关闭popvoer
+    [self.regionPopover dismissPopoverAnimated:YES];
+}
 
 - (void)dealloc
 {
