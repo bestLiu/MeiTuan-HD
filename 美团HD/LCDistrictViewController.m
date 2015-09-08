@@ -12,8 +12,9 @@
 #import "UIView+Extension.h"
 #import "LCCityViewController.h"
 #import "LCNavigationViewController.h"
+#import "LCRegion.h"
 
-@interface LCDistrictViewController ()
+@interface LCDistrictViewController ()<LCHomeDropViewDataSource, LCHomeDropViewDelegate>
 - (IBAction)changeCity;
 
 @end
@@ -22,10 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIView *titleView =  [self.view.subviews firstObject];
-    NSLog(@" %@",titleView);
     
+    //创建下拉菜单
+    UIView *titleView =  [self.view.subviews firstObject];
     LCHomeDropView *dropView = [LCHomeDropView dropView];
+    dropView.dataSource = self;
+    dropView.delegate = self;
     dropView.autoresizingMask = UIViewAutoresizingNone;
     dropView.y = titleView.height;
     [self.view addSubview:dropView];
@@ -36,14 +39,46 @@
 }
 
 
+- (NSInteger) numberOfRowsInMainTable:(LCHomeDropView *)homeDropView
+{
+    return self.regions.count;
+}
+
+- (NSString *)homeDropView:(LCHomeDropView *)homeDropView titleForRowInMainTable:(NSInteger)row
+{
+    LCRegion *region = self.regions[row];
+    return region.name;
+}
+- (NSArray *)subdataForRowInMainTable:(NSInteger)row
+{
+    LCRegion *region = self.regions[row];
+    return region.subregions;
+}
+
+- (void)homeDropView:(LCHomeDropView *)homeDropView didSelectRowInMainTable:(int)row
+{
+    
+}
+- (void)homeDropView:(LCHomeDropView *)homeDropView didSelectRowInSubTable:(int)row inMainTable:(int)mainRow
+{
+    
+}
+
+
+
 /**
  *  切换城市
  */
 - (IBAction)changeCity {
+    //关闭popover
+    [self.popover dismissPopoverAnimated:YES];
+
     LCCityViewController *cityVc = [[LCCityViewController alloc] init];
     LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:cityVc];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:nav animated:YES completion:nil];
+//    [self presentViewController:nav animated:YES completion:nil]
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];//为了关闭popover让窗口的根视图控制器来modal nav。
     
+//    self.presentedViewController 会引用着被modal出来的控制器
 }
 @end

@@ -13,12 +13,22 @@
 #import "LCHomeTopItem.h"
 #import "LCCategoryViewController.h"
 #import "LCDistrictViewController.h"
-
+#import "LCSortViewController.h"
+#import "LCTool.h"
+#import "LCCity.h"
+#import "LCSort.h"
+#import "LCCategory.h"
 @interface LCHomeCollectionViewController ()
 
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
 @property (nonatomic, weak) UIBarButtonItem *districtItem;
 @property (nonatomic, weak) UIBarButtonItem *sortItem;
+
+@property (nonatomic, copy) NSString *selectedCityName;
+
+@property (nonatomic, strong) UIPopoverController *sortPopover;
+@property (nonatomic, strong) UIPopoverController *categoryPopover;
+@property (nonatomic, strong) UIPopoverController *regionPopover;
 
 
 @end
@@ -43,7 +53,16 @@ static NSString * const reuseIdentifier = @"Cell";
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
-    //设置导航栏内容
+    //监听城市改变
+    [LCNotifiCationCenter addObserver:self selector:@selector(cityChange:) name:LCCityDidSelectNotification object:nil];
+    
+    //监听排序改变
+    [LCNotifiCationCenter addObserver:self selector:@selector(sortChange:) name:LCSortDidChangeNotification object:nil];
+    
+    //监听分类改变
+    [LCNotifiCationCenter addObserver:self selector:@selector(categoryChange:) name:LCCategoryDidChangeNotification object:nil];
+    
+    
     [self setupLeftNav];
     [self setupRightNav];
     
@@ -69,6 +88,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
     //4、排序
     LCHomeTopItem *sortTopItem = [LCHomeTopItem item];
+    [sortTopItem setTitle:@"排序"];
+    [sortTopItem setIcon:@"icon_sort" highlightIcon:@"icon_sort_highlighted"];
     [sortTopItem addTarget:self action:@selector(sortClick)];
     UIBarButtonItem *sortItem = [[UIBarButtonItem alloc] initWithCustomView:sortTopItem];
     self.sortItem = sortItem;
@@ -90,16 +111,31 @@ static NSString * const reuseIdentifier = @"Cell";
     //显示分类菜单
     UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[[LCCategoryViewController alloc] init]];
     [popover presentPopoverFromBarButtonItem:self.categoryItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    self.categoryPopover = popover;
 }
 - (void)districtClick
 {
-    //显示区域菜单
-    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[[LCDistrictViewController alloc] init]];
+    LCDistrictViewController *districtVc = [[LCDistrictViewController alloc] init];
+    
+    if (self.selectedCityName) {
+    LCCity *city = [[[LCTool cities] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name = %@",self.selectedCityName]] firstObject];
+    //获得当前选中城市的区域
+    districtVc.regions = city.regions;
+
+    }
+        //显示区域菜单
+    LCDistrictViewController *disctrictVc = [[LCDistrictViewController alloc] init];
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:disctrictVc];
     [popover presentPopoverFromBarButtonItem:self.districtItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    self.regionPopover = popover;
+    disctrictVc.popover = popover;
 }
 - (void)sortClick
 {
-    
+    //显示排序菜单
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[[LCSortViewController alloc] init]];
+    [popover presentPopoverFromBarButtonItem:self.sortItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    self.sortPopover = popover;
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -121,35 +157,60 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
-
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
+#pragma mark - 首页监听城市改变
+- (void)cityChange:(NSNotification *)noti
+{
+    self.selectedCityName = noti.userInfo[LCCitySelectCityKey];
+    
+    // 1更换区域item的文字
+    LCHomeTopItem *topItem = (LCHomeTopItem *)self.districtItem.customView;
+    [topItem setTitle:[NSString stringWithFormat:@"%@ - 全部",_selectedCityName]];
+    [topItem setSubtitle:nil];
+    
+    
+    // 2
+#warning TODO
+//    [self districtClick];
+    
 }
 
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
+- (void)sortChange:(NSNotification *)noti
+{
+    LCSort *sort = noti.userInfo[LCSortSelectKey];
+    // 1更换排序item的文字
+    LCHomeTopItem *topItem = (LCHomeTopItem *)self.sortItem.customView;
+    [topItem setSubtitle:sort.label];
+    
+    //刷新表格数据
+    
+    //关闭POPover
+    [self.sortPopover dismissPopoverAnimated:YES];
+
 }
 
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
+
+- (void)categoryChange:(NSNotification *)noti
+{
+    LCCategory *category = noti.userInfo[LCCategorySelectKey];
+    NSString *subcategoryName = noti.userInfo[LCSubCategorySelectKey];
+    
+    //改变顶部文字
+    LCHomeTopItem *topItem = (LCHomeTopItem *)self.categoryItem.customView;
+    [topItem setIcon:category.icon highlightIcon:category.highlighted_icon];
+    [topItem setTitle:category.name];
+    [topItem setSubtitle:subcategoryName];
+    
+    //刷新表格数据
+    
+    //关闭popvoer
+    [self.categoryPopover dismissPopoverAnimated:YES];
 }
-*/
+
+
+
+- (void)dealloc
+{
+    [LCNotifiCationCenter removeObserver:self];
+}
 
 @end

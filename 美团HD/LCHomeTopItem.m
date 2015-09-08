@@ -11,6 +11,8 @@
 @interface LCHomeTopItem ()
 
 @property (weak, nonatomic) IBOutlet UIButton *iconButton;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 
 @end
 
@@ -29,6 +31,23 @@
 - (void)awakeFromNib
 {
     self.autoresizingMask = UIViewAutoresizingNone;
+}
+
+
+- (void)setIcon:(NSString *)icon highlightIcon:(NSString *)highlightIcon
+{
+    [self.iconButton setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
+    [self.iconButton setImage:[UIImage imageNamed:highlightIcon] forState:UIControlStateHighlighted];
+}
+
+- (void)setTitle:(NSString *)title
+{
+    self.titleLabel.text = title;
+}
+
+- (void)setSubtitle:(NSString *)subtitle
+{
+    self.subtitleLabel.text = subtitle;
 }
 
 @end

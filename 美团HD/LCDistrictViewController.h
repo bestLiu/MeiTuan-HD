@@ -10,4 +10,7 @@
 
 @interface LCDistrictViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *regions;
+
+@property (nonatomic, weak) UIPopoverController *popover;
 @end

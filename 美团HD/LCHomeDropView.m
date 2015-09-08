@@ -8,15 +8,17 @@
 
 
 #import "LCHomeDropView.h"
-#import "LCCategory.h"
 #import "LCHomeDropMainTableViewCell.h"
 #import "LCHomeDropSubTableViewCell.h"
 
 @interface LCHomeDropView ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (weak, nonatomic) IBOutlet UITableView *followTableViw;
-
-@property (nonatomic, strong) LCCategory *selectedCategory;
+//@property (nonatomic, weak) id<LCHomeDropViewData>selectedData;
+/**
+ * 记录左边选中的行号
+ */
+@property (nonatomic, assign) NSInteger selectedMainRow;
 
 @end
 
@@ -38,10 +40,10 @@
 {
     
     if (tableView == self.mainTableView) {
-        return self.categroies.count;
+        return [self.dataSource numberOfRowsInMainTable:self];
     }
     else{
-        return self.selectedCategory.subcategories.count;
+        return [self.dataSource subdataForRowInMainTable:_selectedMainRow].count;
     }
 }
 
@@ -52,12 +54,22 @@
     {
         cell = [LCHomeDropMainTableViewCell cellWithTableViw:tableView];
         
-        LCCategory *category = self.categroies[indexPath.row];
+        //取出数据模型
+    //   id<LCHomeDropViewData>data = [self.dataSource homeDropView:self dataForRowInMainTable:indexPath.row];
         //显示文字
-        cell.textLabel.text = category.name;
-        cell.imageView.image = [UIImage imageNamed:category.small_icon];
+        cell.textLabel.text = [self.dataSource homeDropView:self titleForRowInMainTable:indexPath.row];
+        //图片
+        if ([self.dataSource respondsToSelector:@selector(homeDropView:iconForRowInMainTable:)]) {
+            cell.imageView.image = [UIImage imageNamed: [self.dataSource homeDropView:self iconForRowInMainTable:indexPath.row]];
+        }
+        //高亮图片
+        if ([self.dataSource respondsToSelector:@selector(homeDropView:selectedIconForRowInMainTable:)]) {
+            cell.imageView.highlightedImage = [UIImage imageNamed:[self.dataSource homeDropView:self selectedIconForRowInMainTable:indexPath.row]];
+        }
        
-        if (category.subcategories.count) {
+        //附件箭头
+        NSArray *subdatas = [self.dataSource subdataForRowInMainTable:indexPath.row];
+        if (subdatas.count) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }else{
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -66,8 +78,9 @@
     }
     else
     {
+        NSArray *subdata = [self.dataSource subdataForRowInMainTable:_selectedMainRow];
         cell = [LCHomeDropSubTableViewCell cellWithTableViw:tableView];
-        cell.textLabel.text = self.selectedCategory.subcategories[indexPath.row];
+        cell.textLabel.text = subdata[indexPath.row];
     }
     
     
@@ -78,9 +91,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.mainTableView) {
-        self.selectedCategory = self.categroies[indexPath.row];
+        //哪一行被点击
+        self.selectedMainRow = indexPath.row;
         [self.followTableViw reloadData];
-
+        
+        //通知代理点击了主表
+        if ([self.delegate respondsToSelector:@selector(homeDropView:didSelectRowInMainTable:)]) {
+            [self.delegate homeDropView:self didSelectRowInMainTable:indexPath.row];
+        }
+    }else
+    {
+        //通知代理点击了从表
+        if ([self.delegate respondsToSelector:@selector(homeDropView:didSelectRowInSubTable:inMainTable:)]) {
+            [self.delegate homeDropView:self didSelectRowInSubTable:indexPath.row inMainTable:self.selectedMainRow];
+        }
     }
 }
 

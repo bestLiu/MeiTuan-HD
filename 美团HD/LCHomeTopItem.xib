@@ -36,7 +36,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uS-AQ-eM1">
-                    <rect key="frame" x="0.0" y="0.0" width="33" height="35"/>
+                    <rect key="frame" x="0.0" y="0.0" width="140" height="35"/>
                     <accessibility key="accessibilityConfiguration" label="图标"/>
                     <state key="normal" image="icon_map">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,17 +45,17 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="vq0-99-xO0" firstAttribute="leading" secondItem="4uS-AQ-eM1" secondAttribute="trailing" constant="8" id="BqZ-EO-Iis"/>
                 <constraint firstItem="6MW-uA-Lvm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DMZ-Lx-MjH"/>
+                <constraint firstAttribute="bottom" secondItem="4uS-AQ-eM1" secondAttribute="bottom" id="DT3-rl-NxT"/>
                 <constraint firstAttribute="trailing" secondItem="vq0-99-xO0" secondAttribute="trailing" constant="5" id="G3T-fo-WKm"/>
-                <constraint firstAttribute="bottom" secondItem="4uS-AQ-eM1" secondAttribute="bottom" id="S3y-gC-Txn"/>
-                <constraint firstItem="4uS-AQ-eM1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VPk-Cx-QLN"/>
+                <constraint firstItem="4uS-AQ-eM1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SNV-ZG-rQp"/>
+                <constraint firstAttribute="trailing" secondItem="4uS-AQ-eM1" secondAttribute="trailing" id="aFg-3z-fXf"/>
                 <constraint firstItem="kPx-xV-1e7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="ah7-Lv-Hvh"/>
-                <constraint firstItem="4uS-AQ-eM1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ep4-fj-18w"/>
                 <constraint firstAttribute="bottom" secondItem="kPx-xV-1e7" secondAttribute="bottom" constant="5" id="hJD-fi-kAp"/>
                 <constraint firstAttribute="trailing" secondItem="6MW-uA-Lvm" secondAttribute="trailing" constant="8" id="hSR-Kd-FSp"/>
                 <constraint firstItem="kPx-xV-1e7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lSQ-xk-ADi"/>
                 <constraint firstItem="vq0-99-xO0" firstAttribute="leading" secondItem="kPx-xV-1e7" secondAttribute="trailing" constant="40" id="okQ-L2-hv5"/>
+                <constraint firstItem="4uS-AQ-eM1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sZV-2T-CjZ"/>
                 <constraint firstAttribute="bottom" secondItem="vq0-99-xO0" secondAttribute="bottom" id="yyQ-ee-8a5"/>
                 <constraint firstItem="6MW-uA-Lvm" firstAttribute="leading" secondItem="kPx-xV-1e7" secondAttribute="trailing" constant="40" id="zXw-9K-Lhl"/>
             </constraints>
@@ -63,6 +63,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="iconButton" destination="4uS-AQ-eM1" id="LMJ-gO-iH3"/>
+                <outlet property="subtitleLabel" destination="vq0-99-xO0" id="Joc-gQ-3E6"/>
+                <outlet property="titleLabel" destination="6MW-uA-Lvm" id="Duf-Dx-YbS"/>
             </connections>
             <point key="canvasLocation" x="207" y="81.5"/>
         </view>
