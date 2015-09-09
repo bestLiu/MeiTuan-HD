@@ -19,14 +19,16 @@
 #import "LCSort.h"
 #import "LCCategory.h"
 #import "LCRegion.h"
-#import "dianpingapi/DPAPI.h"
-#import "LCDeal.h"
-#import "LCDealCell.h"
 #import "MJRefresh.h"
-#import "SVProgressHUD.h"
+#import "LCDeal.h"
+#import "LCSearchCollectionViewController.h"
+#import "AwesomeMenu.h"
 #import "UIView+AutoLayout.h"
 #import "LCNavigationViewController.h"
-@interface LCHomeCollectionViewController ()<DPRequestDelegate>
+#import "LCRecentViewController.h"
+#import "LCCollectViewController.h"
+
+@interface LCHomeCollectionViewController ()<AwesomeMenuDelegate>
 
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
 @property (nonatomic, weak) UIBarButtonItem *districtItem;
@@ -40,64 +42,64 @@
 @property (nonatomic, strong) UIPopoverController *sortPopover;
 @property (nonatomic, strong) UIPopoverController *categoryPopover;
 @property (nonatomic, strong) UIPopoverController *regionPopover;
-
-@property (nonatomic, strong) NSMutableArray *deals;//所有的团购数据
 @property (nonatomic, assign) int page;
-@property (nonatomic, weak) DPRequest *lastRequest;
-@property (nonatomic, weak) UIImageView *nodataView;
+
+
+
+
 
 @end
 
 @implementation LCHomeCollectionViewController
 
-static NSString * const reuseIdentifier = @"deal";
-
-
-- (instancetype)init
-{
-//    self.collectionView.autoresizingMask = UIViewAutoresizingNone;
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    // cell的大小
-    layout.itemSize = CGSizeMake(305, 305);
-    // 设置上下左右的间距
-    CGFloat inset = 15;
-    layout.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
-    return [self initWithCollectionViewLayout:layout];
-}
-- (NSMutableArray *)deals
-{
-    if (!_deals) {
-        self.deals = [[NSMutableArray alloc] init];
-    }
-    return _deals;
-}
-
-//当屏幕旋转，控制器view的尺寸发生改变时调用
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    int cols = (size.width == 1024)?3:2;
-    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
-    CGFloat inset = (size.width - cols * layout.itemSize.width)/(cols + 1);
-    layout.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
-    
-    //设置每一行之间的间距
-    layout.minimumLineSpacing = inset;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
 //    self.view == self.collectionView.superview
-    self.collectionView.backgroundColor = LCGlobalBg;
-    self.collectionView.alwaysBounceVertical = NO;
-
-    [self.collectionView registerNib:[UINib nibWithNibName:@"LCDealCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
+ 
     
-    //添加没有数据提醒
-    UIImageView *nodataView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_deals_empty"]];
-    nodataView.hidden = YES;
-    [self.view addSubview:nodataView];
-    [nodataView autoCenterInSuperview];//直接让它在父控件中央
-    self.nodataView = nodataView;
+    
+    [self setupNotificaion];
+    
+    [self setupLeftNav];
+    [self setupRightNav];
+    
+    //创建AweSomeMenu
+    [self setAwesomeMenu];
+   
+}
+- (void)setAwesomeMenu
+{
+    // 1.中间的item
+    AwesomeMenuItem *startItem = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"icon_pathMenu_background_highlighted"] highlightedImage:nil ContentImage:[UIImage imageNamed:@"icon_pathMenu_mainMine_normal"] highlightedContentImage:nil];
+    
+    // 2.周边的item
+    AwesomeMenuItem *item0 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"bg_pathMenu_black_normal"] highlightedImage:nil ContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_normal"] highlightedContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_highlighted"]];
+    AwesomeMenuItem *item1 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"bg_pathMenu_black_normal"] highlightedImage:nil ContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_normal"] highlightedContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_highlighted"]];
+    AwesomeMenuItem *item2 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"bg_pathMenu_black_normal"] highlightedImage:nil ContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_normal"] highlightedContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_highlighted"]];
+    AwesomeMenuItem *item3 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"bg_pathMenu_black_normal"] highlightedImage:nil ContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_normal"] highlightedContentImage:[UIImage imageNamed:@"icon_pathMenu_collect_highlighted"]];
+    
+    NSArray *items = @[item0, item1, item2, item3];
+    AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:CGRectZero startItem:startItem optionMenus:items];
+    menu.alpha = 0.5;
+    // 设置菜单的活动范围
+    menu.menuWholeAngle = M_PI_2;
+    // 设置开始按钮的位置
+    menu.startPoint = CGPointMake(50, 150);
+    // 设置代理
+    menu.delegate = self;
+    // 不要旋转中间按钮
+    menu.rotateAddButton = NO;
+    [self.view addSubview:menu];
+    
+    // 设置菜单永远在左下角
+    [menu autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
+    [menu autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [menu autoSetDimensionsToSize:CGSizeMake(200, 200)];//设置尺寸
+}
+
+- (void)setupNotificaion
+{
     
     //监听城市改变
     [LCNotifiCationCenter addObserver:self selector:@selector(cityChange:) name:LCCityDidSelectNotification object:nil];
@@ -110,98 +112,7 @@ static NSString * const reuseIdentifier = @"deal";
     
     //监听区域改变
     [LCNotifiCationCenter addObserver:self selector:@selector(regionChange:) name:LCRegionDidChangeNotification object:nil];
-    
-    
-    [self setupLeftNav];
-    [self setupRightNav];
-    
-    //添加上拉刷新控件
-    [self.collectionView addFooterWithTarget:self action:@selector(loadMoreDeals)];
-    [self.collectionView addHeaderWithTarget:self action:@selector(loadNewDeals)];
 }
-
-#pragma mark 跟服务器交互
-
-- (void)loadMoreDeals
-{
-    self.page ++;
-    [self loadDeals];
-}
-- (void)loadNewDeals
-{
-    self.page = 1;
-    [self loadDeals];
-}
-- (void)loadDeals
-{
-    NSString *urlString = @"v1/deal/find_deals";
-    DPAPI *api = [[DPAPI alloc] init];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    //城市
-    params[@"page"] = @(self.page);
-    params[@"city"] = self.selectedCityName;
-    params[@"limit"] = @5;
-    if (self.selectedCategoryName) {
-        params[@"category"] = self.selectedCategoryName;
-    }
-    if (self.selectedSort) {
-        params[@"sort"] = @(self.selectedSort.value);
-    }
-    if (self.selectedRegionName) {
-        params[@"region"] = self.selectedRegionName;
-    }
-    NSLog(@"parameters -->>> %@",params);
-    
-    
-    self.lastRequest = [api requestWithURL:urlString params:params delegate:self];
-}
-
-
-#pragma mark 请求代理
-- (void)request:(DPRequest *)request didFailWithError:(NSError *)error
-{
-    //请求失败
-    NSLog(@"请求失败--->>> %@",error);
-    // 提醒用户失败
-    [SVProgressHUD showErrorWithStatus:@"网络错误,请稍候再试"];
-    
-    // 结束上/下拉刷新
-    [self.collectionView footerEndRefreshing];
-    [self.collectionView headerEndRefreshing];
-    
-    //如果是上拉刷新失败
-    if (self.page > 1) {
-        self.page -- ;
-    }
-    
-}
-
-- (void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result
-{
-    if (request != self.lastRequest) return; //如果不是最后一个请求 就结束
-    
-    
-    //1、取出团购的字典数组
-   NSArray *deals = [LCDeal objectArrayWithKeyValuesArray:result[@"deals"]];
-    if (self.page == 1) {//第一页数据,清除之前的旧数据
-        [self.deals removeAllObjects];
-    }
-    [self.deals addObjectsFromArray:deals];
-    
-    //2 、刷新表格
-    [self.collectionView reloadData];
-    
-    //3 、结束上/下拉加载
-    [self.collectionView footerEndRefreshing];
-    [self.collectionView headerEndRefreshing];
-    
-    //4 、控制尾部刷新控件的显示和隐藏.总数和数组的长度相等的时候影藏上拉刷新
-    self.collectionView.footerHidden = [result[@"total_count"] integerValue] == self.deals.count;
-    
-    //5 、控制没有数据的提醒
-    self.nodataView.hidden = self.deals.count != 0;
-}
-
 - (void)setupLeftNav
 {
     // 1、logo
@@ -273,35 +184,14 @@ static NSString * const reuseIdentifier = @"deal";
 }
 - (void)searchClick
 {
-    LCNavigationViewController *nav = [[LCNavigationViewController alloc] init];
     
-}
-
-#pragma mark <UICollectionViewDataSource>
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    //计算cell 的内边距
-    [self viewWillTransitionToSize:CGSizeMake(self.collectionView.size.width, 0) withTransitionCoordinator:nil];
-    
-    return 1;
+    LCSearchCollectionViewController *searchController = [[LCSearchCollectionViewController alloc] init];
+    LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:searchController];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"self.deals.count %d",self.deals.count);
-    return self.deals.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    LCDealCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.deal = self.deals[indexPath.item];
-    return cell;
-}
-
-#pragma mark - 首页监听城市改变
+#pragma mark - 首页监听改变
 - (void)cityChange:(NSNotification *)noti
 {
     self.selectedCityName = noti.userInfo[LCCitySelectCityKey];
@@ -329,10 +219,8 @@ static NSString * const reuseIdentifier = @"deal";
     
     //关闭POPover
     [self.sortPopover dismissPopoverAnimated:YES];
-
     
 }
-
 
 - (void)categoryChange:(NSNotification *)noti
 {
@@ -387,6 +275,67 @@ static NSString * const reuseIdentifier = @"deal";
     //关闭popvoer
     [self.regionPopover dismissPopoverAnimated:YES];
     
+}
+
+#pragma mark -调用父类的方法设置参数
+- (void)setupParams:(NSMutableDictionary *)params
+{
+    //城市
+    params[@"page"] = @(self.page);
+    params[@"city"] = self.selectedCityName;
+    params[@"limit"] = @9;
+    if (self.selectedCategoryName) {
+        params[@"category"] = self.selectedCategoryName;
+    }
+    if (self.selectedSort) {
+        params[@"sort"] = @(self.selectedSort.value);
+    }
+    if (self.selectedRegionName) {
+        params[@"region"] = self.selectedRegionName;
+    }
+    NSLog(@"parameters -->>> %@",params);
+    
+}
+#pragma mark - AwesomeMenuDelegate
+- (void)awesomeMenuWillAnimateOpen:(AwesomeMenu *)menu
+{
+    // 替换菜单的图片
+    menu.contentImage = [UIImage imageNamed:@"icon_pathMenu_cross_normal"];
+    
+    // 完全显示
+    menu.alpha = 1.0;
+}
+
+- (void)awesomeMenuWillAnimateClose:(AwesomeMenu *)menu
+{
+    // 替换菜单的图片
+    menu.contentImage = [UIImage imageNamed:@"icon_pathMenu_mainMine_normal"];
+    
+    // 半透明显示
+    menu.alpha = 0.5;
+}
+
+- (void)awesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx
+{
+    // 替换菜单的图片
+    menu.contentImage = [UIImage imageNamed:@"icon_pathMenu_mainMine_normal"];
+    
+    switch (idx) {
+        case 0: { // 收藏
+            LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:[[LCCollectViewController alloc] init]];
+            [self presentViewController:nav animated:YES completion:nil];
+            break;
+        }
+            
+        case 1: { // 最近访问记录
+            LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:[[LCRecentViewController alloc] init]];
+            [self presentViewController:nav animated:YES completion:nil];
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 

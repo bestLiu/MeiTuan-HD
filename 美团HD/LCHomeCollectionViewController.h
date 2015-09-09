@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCDealsViewController.h"
 
-@interface LCHomeCollectionViewController : UICollectionViewController
+@interface LCHomeCollectionViewController : LCDealsViewController
 
 @end

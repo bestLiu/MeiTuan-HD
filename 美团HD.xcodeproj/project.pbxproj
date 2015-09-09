@@ -11,6 +11,12 @@
 		89011DBE1BA010AC00612B20 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 89011DB81BA010AC00612B20 /* README.md */; };
 		89011DBF1BA010AC00612B20 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 89011DBA1BA010AC00612B20 /* SVProgressHUD.bundle */; };
 		89011DC01BA010AC00612B20 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89011DBC1BA010AC00612B20 /* SVProgressHUD.m */; };
+		89011DC41BA0256400612B20 /* LCDealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89011DC31BA0256400612B20 /* LCDealsViewController.m */; };
+		89011DC71BA0291400612B20 /* LCSearchCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89011DC61BA0291400612B20 /* LCSearchCollectionViewController.m */; };
+		89011DCD1BA032D400612B20 /* AwesomeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 89011DCA1BA032D400612B20 /* AwesomeMenu.m */; };
+		89011DCE1BA032D400612B20 /* AwesomeMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 89011DCC1BA032D400612B20 /* AwesomeMenuItem.m */; };
+		89011DD21BA0369F00612B20 /* LCRecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89011DD11BA0369F00612B20 /* LCRecentViewController.m */; };
+		89011DD61BA036EC00612B20 /* LCCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89011DD51BA036EC00612B20 /* LCCollectViewController.m */; };
 		8903E0D11B9EB1A7000B612C /* LCTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8903E0D01B9EB1A7000B612C /* LCTool.m */; };
 		8903E0D41B9ECFF6000B612C /* LCSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 8903E0D31B9ECFF6000B612C /* LCSort.m */; };
 		8903E0D71B9ED09D000B612C /* LCSortViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8903E0D61B9ED09D000B612C /* LCSortViewController.m */; };
@@ -118,6 +124,18 @@
 		89011DBA1BA010AC00612B20 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		89011DBB1BA010AC00612B20 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		89011DBC1BA010AC00612B20 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		89011DC21BA0256400612B20 /* LCDealsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCDealsViewController.h; sourceTree = "<group>"; };
+		89011DC31BA0256400612B20 /* LCDealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCDealsViewController.m; sourceTree = "<group>"; };
+		89011DC51BA0291400612B20 /* LCSearchCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCSearchCollectionViewController.h; sourceTree = "<group>"; };
+		89011DC61BA0291400612B20 /* LCSearchCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCSearchCollectionViewController.m; sourceTree = "<group>"; };
+		89011DC91BA032D400612B20 /* AwesomeMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeMenu.h; sourceTree = "<group>"; };
+		89011DCA1BA032D400612B20 /* AwesomeMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeMenu.m; sourceTree = "<group>"; };
+		89011DCB1BA032D400612B20 /* AwesomeMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeMenuItem.h; sourceTree = "<group>"; };
+		89011DCC1BA032D400612B20 /* AwesomeMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeMenuItem.m; sourceTree = "<group>"; };
+		89011DD01BA0369F00612B20 /* LCRecentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCRecentViewController.h; sourceTree = "<group>"; };
+		89011DD11BA0369F00612B20 /* LCRecentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCRecentViewController.m; sourceTree = "<group>"; };
+		89011DD41BA036EC00612B20 /* LCCollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCollectViewController.h; sourceTree = "<group>"; };
+		89011DD51BA036EC00612B20 /* LCCollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCollectViewController.m; sourceTree = "<group>"; };
 		8903E0CF1B9EB1A7000B612C /* LCTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCTool.h; sourceTree = "<group>"; };
 		8903E0D01B9EB1A7000B612C /* LCTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCTool.m; sourceTree = "<group>"; };
 		8903E0D21B9ECFF6000B612C /* LCSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCSort.h; sourceTree = "<group>"; };
@@ -348,8 +366,39 @@
 		89011DC11BA01AD500612B20 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				89011DC51BA0291400612B20 /* LCSearchCollectionViewController.h */,
+				89011DC61BA0291400612B20 /* LCSearchCollectionViewController.m */,
 			);
 			name = Search;
+			sourceTree = "<group>";
+		};
+		89011DC81BA032D400612B20 /* AwesomeMenu */ = {
+			isa = PBXGroup;
+			children = (
+				89011DC91BA032D400612B20 /* AwesomeMenu.h */,
+				89011DCA1BA032D400612B20 /* AwesomeMenu.m */,
+				89011DCB1BA032D400612B20 /* AwesomeMenuItem.h */,
+				89011DCC1BA032D400612B20 /* AwesomeMenuItem.m */,
+			);
+			path = AwesomeMenu;
+			sourceTree = "<group>";
+		};
+		89011DCF1BA0367700612B20 /* Collect */ = {
+			isa = PBXGroup;
+			children = (
+				89011DD41BA036EC00612B20 /* LCCollectViewController.h */,
+				89011DD51BA036EC00612B20 /* LCCollectViewController.m */,
+			);
+			name = Collect;
+			sourceTree = "<group>";
+		};
+		89011DD31BA036A400612B20 /* Recent */ = {
+			isa = PBXGroup;
+			children = (
+				89011DD01BA0369F00612B20 /* LCRecentViewController.h */,
+				89011DD11BA0369F00612B20 /* LCRecentViewController.m */,
+			);
+			name = Recent;
 			sourceTree = "<group>";
 		};
 		896E5DE71B9D2515008F7A2F /* Category */ = {
@@ -386,6 +435,7 @@
 				896E5E151B9D25E1008F7A2F /* MJExtension */,
 				896E5DFD1B9D25E1008F7A2F /* Masonry */,
 				896E5DE71B9D2515008F7A2F /* Category */,
+				89011DC81BA032D400612B20 /* AwesomeMenu */,
 			);
 			name = Libs;
 			sourceTree = "<group>";
@@ -464,6 +514,8 @@
 		896E5E4D1B9D32CB008F7A2F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				89011DC21BA0256400612B20 /* LCDealsViewController.h */,
+				89011DC31BA0256400612B20 /* LCDealsViewController.m */,
 				89D0FCF51B9C3B3A00731253 /* LCHomeCollectionViewController.h */,
 				89D0FCF61B9C3B3A00731253 /* LCHomeCollectionViewController.m */,
 				896E5E541B9D3A32008F7A2F /* LCCategoryViewController.h */,
@@ -668,6 +720,8 @@
 				896E5E4C1B9D313A008F7A2F /* Home */,
 				896E5E7B1B9D7D52008F7A2F /* City */,
 				89011DC11BA01AD500612B20 /* Search */,
+				89011DCF1BA0367700612B20 /* Collect */,
+				89011DD31BA036A400612B20 /* Recent */,
 				89D0FCDC1B9C35D900731253 /* Images.xcassets */,
 			);
 			name = Classes;
@@ -830,11 +884,13 @@
 				896E5E511B9D3340008F7A2F /* LCHomeDropView.m in Sources */,
 				89AC76DD1B9FCAB8000B7B6C /* UIImageView+HighlightedWebCache.m in Sources */,
 				896E5E701B9D7211008F7A2F /* LCHomeDropSubTableViewCell.m in Sources */,
+				89011DCE1BA032D400612B20 /* AwesomeMenuItem.m in Sources */,
 				89AC76DF1B9FCAB8000B7B6C /* UIView+WebCacheOperation.m in Sources */,
 				89AC76D61B9FCAB8000B7B6C /* SDWebImageDownloaderOperation.m in Sources */,
 				896E5E351B9D25E1008F7A2F /* View+MASAdditions.m in Sources */,
 				896E5E811B9D85DB008F7A2F /* LCRegion.m in Sources */,
 				89AC77011BA007F4000B7B6C /* MJRefreshFooterView.m in Sources */,
+				89011DC41BA0256400612B20 /* LCDealsViewController.m in Sources */,
 				896E5E381B9D25E1008F7A2F /* MJFoundation.m in Sources */,
 				89AC76AC1B9FCAB4000B7B6C /* DPAPI.m in Sources */,
 				896E5E361B9D25E1008F7A2F /* MJArgument.m in Sources */,
@@ -854,6 +910,7 @@
 				89AC76D71B9FCAB8000B7B6C /* SDWebImageManager.m in Sources */,
 				89D0FCD51B9C35D900731253 /* AppDelegate.m in Sources */,
 				89D0FCFD1B9C3D8D00731253 /* LCConst.m in Sources */,
+				89011DD21BA0369F00612B20 /* LCRecentViewController.m in Sources */,
 				89AC76DB1B9FCAB8000B7B6C /* UIImage+MultiFormat.m in Sources */,
 				89AC76D81B9FCAB8000B7B6C /* SDWebImagePrefetcher.m in Sources */,
 				89011DBE1BA010AC00612B20 /* README.md in Sources */,
@@ -861,6 +918,7 @@
 				89AC77051BA007F4000B7B6C /* UIView+MJExtension.m in Sources */,
 				896E5E461B9D25EA008F7A2F /* UIView+Extension.m in Sources */,
 				896E5E2F1B9D25E1008F7A2F /* MASConstraintMaker.m in Sources */,
+				89011DC71BA0291400612B20 /* LCSearchCollectionViewController.m in Sources */,
 				89AC77001BA007F4000B7B6C /* MJRefreshConst.m in Sources */,
 				896E5E6D1B9D71FF008F7A2F /* LCHomeDropMainTableViewCell.m in Sources */,
 				89AC76E11B9FCAC8000B7B6C /* Foundation+Log.m in Sources */,
@@ -868,6 +926,7 @@
 				896E5E741B9D77FA008F7A2F /* LCDistrictViewController.m in Sources */,
 				89AC76D41B9FCAB8000B7B6C /* SDWebImageDecoder.m in Sources */,
 				896E5E451B9D25EA008F7A2F /* UIBarButtonItem+Extension.m in Sources */,
+				89011DD61BA036EC00612B20 /* LCCollectViewController.m in Sources */,
 				896E5E2E1B9D25E1008F7A2F /* MASConstraint.m in Sources */,
 				896E5E341B9D25E1008F7A2F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				896E5E3C1B9D25E1008F7A2F /* MJType.m in Sources */,
@@ -888,6 +947,7 @@
 				896E5E371B9D25E1008F7A2F /* MJConst.m in Sources */,
 				89AC77021BA007F4000B7B6C /* MJRefreshHeaderView.m in Sources */,
 				89AC76D21B9FCAB8000B7B6C /* SDImageCache.m in Sources */,
+				89011DCD1BA032D400612B20 /* AwesomeMenu.m in Sources */,
 				896E5E671B9D3E84008F7A2F /* LCCategory.m in Sources */,
 				896E5DF51B9D2515008F7A2F /* UIButton+WF.m in Sources */,
 				896E5DF71B9D2515008F7A2F /* UIScreen+WF.m in Sources */,
