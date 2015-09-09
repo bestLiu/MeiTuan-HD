@@ -214,6 +214,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		408879B11B9F702E003C643C /* UIView+AutoLayout */ = {
+			isa = PBXGroup;
+			children = (
+				89DA60D61B9E7939000122C3 /* UIView+AutoLayout.h */,
+				89DA60D71B9E7939000122C3 /* UIView+AutoLayout.m */,
+			);
+			name = "UIView+AutoLayout";
+			sourceTree = "<group>";
+		};
 		896E5DE71B9D2515008F7A2F /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,8 +248,7 @@
 		896E5DFB1B9D2524008F7A2F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				89DA60D61B9E7939000122C3 /* UIView+AutoLayout.h */,
-				89DA60D71B9E7939000122C3 /* UIView+AutoLayout.m */,
+				408879B11B9F702E003C643C /* UIView+AutoLayout */,
 				896E5E151B9D25E1008F7A2F /* MJExtension */,
 				896E5DFD1B9D25E1008F7A2F /* Masonry */,
 				896E5DE71B9D2515008F7A2F /* Category */,
@@ -313,7 +321,6 @@
 		896E5E4C1B9D313A008F7A2F /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				896E5E631B9D3E3D008F7A2F /* Model */,
 				896E5E4D1B9D32CB008F7A2F /* Controllers */,
 				896E5E4E1B9D32DC008F7A2F /* Views */,
 			);
@@ -362,23 +369,6 @@
 				896E5E5E1B9D3D73008F7A2F /* sorts.plist */,
 			);
 			path = Plist;
-			sourceTree = "<group>";
-		};
-		896E5E631B9D3E3D008F7A2F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				896E5E641B9D3E54008F7A2F /* New Group */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		896E5E641B9D3E54008F7A2F /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				896E5E651B9D3E84008F7A2F /* LCCategory.h */,
-				896E5E661B9D3E84008F7A2F /* LCCategory.m */,
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 		896E5E7B1B9D7D52008F7A2F /* City */ = {
@@ -490,6 +480,8 @@
 				896E5E831B9D889D008F7A2F /* LCcityGroup.m */,
 				8903E0D21B9ECFF6000B612C /* LCSort.h */,
 				8903E0D31B9ECFF6000B612C /* LCSort.m */,
+				896E5E651B9D3E84008F7A2F /* LCCategory.h */,
+				896E5E661B9D3E84008F7A2F /* LCCategory.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";

@@ -7,7 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LCHomeTopItem">
-            <rect key="frame" x="0.0" y="5" width="140" height="35"/>
+            <rect key="frame" x="0.0" y="0.0" width="160" height="35"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kPx-xV-1e7" userLabel="分割线">
@@ -18,25 +18,25 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6MW-uA-Lvm">
-                    <rect key="frame" x="41" y="0.0" width="91" height="21"/>
+                    <rect key="frame" x="41" y="0.0" width="114" height="17"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="ktg-6e-i3X"/>
+                        <constraint firstAttribute="height" constant="17" id="ktg-6e-i3X"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="子标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vq0-99-xO0">
-                    <rect key="frame" x="41" y="15" width="94" height="20"/>
+                    <rect key="frame" x="41" y="18" width="114" height="17"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="S5a-qC-F5p"/>
+                        <constraint firstAttribute="height" constant="17" id="S5a-qC-F5p"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uS-AQ-eM1">
-                    <rect key="frame" x="0.0" y="0.0" width="140" height="35"/>
+                    <rect key="frame" x="0.0" y="0.0" width="160" height="35"/>
                     <accessibility key="accessibilityConfiguration" label="图标"/>
                     <state key="normal" image="icon_map">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,7 +52,7 @@
                 <constraint firstAttribute="trailing" secondItem="4uS-AQ-eM1" secondAttribute="trailing" id="aFg-3z-fXf"/>
                 <constraint firstItem="kPx-xV-1e7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="ah7-Lv-Hvh"/>
                 <constraint firstAttribute="bottom" secondItem="kPx-xV-1e7" secondAttribute="bottom" constant="5" id="hJD-fi-kAp"/>
-                <constraint firstAttribute="trailing" secondItem="6MW-uA-Lvm" secondAttribute="trailing" constant="8" id="hSR-Kd-FSp"/>
+                <constraint firstAttribute="trailing" secondItem="6MW-uA-Lvm" secondAttribute="trailing" constant="5" id="hSR-Kd-FSp"/>
                 <constraint firstItem="kPx-xV-1e7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lSQ-xk-ADi"/>
                 <constraint firstItem="vq0-99-xO0" firstAttribute="leading" secondItem="kPx-xV-1e7" secondAttribute="trailing" constant="40" id="okQ-L2-hv5"/>
                 <constraint firstItem="4uS-AQ-eM1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sZV-2T-CjZ"/>
@@ -66,7 +66,7 @@
                 <outlet property="subtitleLabel" destination="vq0-99-xO0" id="Joc-gQ-3E6"/>
                 <outlet property="titleLabel" destination="6MW-uA-Lvm" id="Duf-Dx-YbS"/>
             </connections>
-            <point key="canvasLocation" x="207" y="81.5"/>
+            <point key="canvasLocation" x="217" y="81.5"/>
         </view>
     </objects>
     <resources>
