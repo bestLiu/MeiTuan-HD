@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>4EB89B69-EC14-44A9-8E5F-08CD77C2C248</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>美团HD</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E517F2F94F8F6B5C8FE817840134E9A1C87AAAC9</key>
 		<string>github.com:bestLiu/MeiTuan-HD.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>美团HD.xcodeproj/project.xcworkspace</string>
+	<string>美团HD.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E517F2F94F8F6B5C8FE817840134E9A1C87AAAC9</key>
