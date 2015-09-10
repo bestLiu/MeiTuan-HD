@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LCDetailViewController">
+            <connections>
+                <outlet property="loadingView" destination="QHt-A7-dDk" id="HFA-XU-Yih"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="tTT-Ln-RTY"/>
+                <outlet property="webView" destination="Qs4-xX-ota" id="t4f-lR-vTs"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qs4-xX-ota">
+                    <rect key="frame" x="424" y="0.0" width="176" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="x4i-rJ-lmk"/>
+                    </connections>
+                </webView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="QHt-A7-dDk">
+                    <rect key="frame" x="502" y="290" width="20" height="20"/>
+                </activityIndicatorView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGv-yG-GFX">
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F36-NO-dJM">
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigationBar_normal" translatesAutoresizingMaskIntoConstraints="NO" id="Yfh-vt-pO6" userLabel="背景">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dvu-8F-Mno" userLabel="返回按钮">
+                                    <rect key="frame" x="8" y="20" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="44" id="0Vx-X2-aij"/>
+                                        <constraint firstAttribute="height" constant="44" id="xwk-C7-WLF"/>
+                                    </constraints>
+                                    <state key="normal" image="icon_back">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" image="icon_back_highlighted"/>
+                                    <connections>
+                                        <action selector="backButtonClick:" destination="-1" eventType="touchUpInside" id="eaW-KI-q0g"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="团购详情" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCY-QB-r2S">
+                                    <rect key="frame" x="0.0" y="20" width="400" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="Y8I-0Z-zJJ"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="0.53595291940000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Yfh-vt-pO6" secondAttribute="trailing" id="0ZG-vZ-ogV"/>
+                                <constraint firstAttribute="trailing" secondItem="RCY-QB-r2S" secondAttribute="trailing" id="1Ux-C8-3sf"/>
+                                <constraint firstItem="Yfh-vt-pO6" firstAttribute="leading" secondItem="F36-NO-dJM" secondAttribute="leading" id="6Cp-x3-5E4"/>
+                                <constraint firstAttribute="height" constant="64" id="XAJ-mu-ab0"/>
+                                <constraint firstItem="RCY-QB-r2S" firstAttribute="leading" secondItem="F36-NO-dJM" secondAttribute="leading" id="cqM-iN-nY0"/>
+                                <constraint firstAttribute="bottom" secondItem="RCY-QB-r2S" secondAttribute="bottom" id="llb-zO-3Wz"/>
+                                <constraint firstAttribute="bottom" secondItem="Dvu-8F-Mno" secondAttribute="bottom" id="mwE-nk-Dvl"/>
+                                <constraint firstItem="Yfh-vt-pO6" firstAttribute="top" secondItem="F36-NO-dJM" secondAttribute="top" id="pws-aD-DG6"/>
+                                <constraint firstAttribute="bottom" secondItem="Yfh-vt-pO6" secondAttribute="bottom" id="tIn-4H-PwP"/>
+                                <constraint firstItem="Dvu-8F-Mno" firstAttribute="leading" secondItem="F36-NO-dJM" secondAttribute="leading" constant="8" id="xpM-q8-gkO"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="F36-NO-dJM" firstAttribute="leading" secondItem="WGv-yG-GFX" secondAttribute="leading" id="Eeu-sF-8Nm"/>
+                        <constraint firstAttribute="trailing" secondItem="F36-NO-dJM" secondAttribute="trailing" id="GCw-eF-D8T"/>
+                        <constraint firstAttribute="width" constant="400" id="Spe-gh-FlV"/>
+                        <constraint firstItem="F36-NO-dJM" firstAttribute="top" secondItem="WGv-yG-GFX" secondAttribute="top" id="cha-Bg-BNi"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="QHt-A7-dDk" firstAttribute="centerY" secondItem="Qs4-xX-ota" secondAttribute="centerY" id="52O-um-Bdv"/>
+                <constraint firstAttribute="bottom" secondItem="WGv-yG-GFX" secondAttribute="bottom" id="Cbf-h8-VO2"/>
+                <constraint firstItem="WGv-yG-GFX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Gwc-qi-MPO"/>
+                <constraint firstItem="QHt-A7-dDk" firstAttribute="centerX" secondItem="Qs4-xX-ota" secondAttribute="centerX" id="Hng-lZ-7IH"/>
+                <constraint firstItem="WGv-yG-GFX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Kg4-Dq-Xpg"/>
+                <constraint firstAttribute="trailing" secondItem="Qs4-xX-ota" secondAttribute="trailing" id="YfF-rg-FCS"/>
+                <constraint firstItem="Qs4-xX-ota" firstAttribute="leading" secondItem="WGv-yG-GFX" secondAttribute="trailing" constant="24" id="pw6-h7-qFo"/>
+                <constraint firstAttribute="bottom" secondItem="Qs4-xX-ota" secondAttribute="bottom" id="vl0-1x-Uuh"/>
+                <constraint firstItem="Qs4-xX-ota" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yCg-Hq-uhk"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+        </view>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="COE-7F-bZH">
+            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+            <nil key="highlightedColor"/>
+        </label>
+    </objects>
+    <resources>
+        <image name="bg_navigationBar_normal" width="124" height="124"/>
+        <image name="icon_back" width="30" height="30"/>
+        <image name="icon_back_highlighted" width="30" height="30"/>
+    </resources>
+</document>

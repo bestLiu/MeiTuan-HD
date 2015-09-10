@@ -30,4 +30,6 @@
 
 @property (copy, nonatomic) NSString *publish_date;
 
+@property (nonatomic, copy) NSString *deal_h5_url;
+
 @end

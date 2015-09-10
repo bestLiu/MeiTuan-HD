@@ -10,4 +10,6 @@
 
 @interface LCSearchCollectionViewController : LCDealsViewController
 
+@property (nonatomic, copy) NSString *cityName;
+
 @end

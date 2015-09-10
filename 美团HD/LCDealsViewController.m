@@ -16,7 +16,7 @@
 #import "SVProgressHUD.h"
 #import "MJExtension.h"
 #import "LCDeal.h"
-
+#import "LCDetailViewController.h"
 @interface LCDealsViewController ()<DPRequestDelegate>
 
 @property (nonatomic, weak) DPRequest *lastRequest;
@@ -166,8 +166,16 @@ static NSString * const reuseIdentifier = @"deal";
     
     LCDealCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     cell.deal = self.deals[indexPath.item];
+    
     return cell;
 }
+#pragma mark <UICollectionViewDelegate>
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    LCDetailViewController *detailVc = [[LCDetailViewController alloc] init];
+    detailVc.deal = self.deals[indexPath.item];
+    [self presentViewController:detailVc animated:YES completion:nil];
+}
 
 @end

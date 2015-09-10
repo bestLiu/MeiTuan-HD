@@ -184,10 +184,15 @@
 }
 - (void)searchClick
 {
+    if (self.selectedCityName) {
+        LCSearchCollectionViewController *searchController = [[LCSearchCollectionViewController alloc] init];
+        searchController.cityName = self.selectedCityName;
+        LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:searchController];
+        [self presentViewController:nav animated:YES completion:nil];
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"请选择城市"];
+    }
     
-    LCSearchCollectionViewController *searchController = [[LCSearchCollectionViewController alloc] init];
-    LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:searchController];
-    [self presentViewController:nav animated:YES completion:nil];
 }
 
 
