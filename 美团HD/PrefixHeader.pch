@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  美团HD
+//
+//  Created by liuchun on 15/9/11.
+//  Copyright (c) 2015年 BNDK. All rights reserved.
+//
+
+#ifndef __HD_PrefixHeader_pch
+#define __HD_PrefixHeader_pch
+
+#import "LCConst.h"
+#import "LCTool.h"
+#import "LCDeal.h"
+
+#endif

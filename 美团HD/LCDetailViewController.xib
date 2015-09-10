@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LCDetailViewController">
             <connections>
+                <outlet property="headImageView" destination="E86-Eo-THa" id="JAs-wh-d8J"/>
                 <outlet property="loadingView" destination="QHt-A7-dDk" id="HFA-XU-Yih"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="tTT-Ln-RTY"/>
                 <outlet property="webView" destination="Qs4-xX-ota" id="t4f-lR-vTs"/>
@@ -16,20 +17,13 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qs4-xX-ota">
-                    <rect key="frame" x="424" y="0.0" width="176" height="600"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="x4i-rJ-lmk"/>
-                    </connections>
-                </webView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="QHt-A7-dDk">
                     <rect key="frame" x="502" y="290" width="20" height="20"/>
                 </activityIndicatorView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGv-yG-GFX">
                     <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F36-NO-dJM">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F36-NO-dJM" userLabel="导航栏">
                             <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigationBar_normal" translatesAutoresizingMaskIntoConstraints="NO" id="Yfh-vt-pO6" userLabel="背景">
@@ -73,15 +67,123 @@
                                 <constraint firstItem="Dvu-8F-Mno" firstAttribute="leading" secondItem="F36-NO-dJM" secondAttribute="leading" constant="8" id="xpM-q8-gkO"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMa-4B-kvn" userLabel="左边底部背景view">
+                            <rect key="frame" x="10" y="64" width="390" height="536"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_deal" translatesAutoresizingMaskIntoConstraints="NO" id="E86-Eo-THa">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="250"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="250" id="gIA-23-fdP"/>
+                                    </constraints>
+                                </imageView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Go-Cd-TOe" userLabel="line">
+                                    <rect key="frame" x="0.0" y="260" width="390" height="1"/>
+                                    <color key="backgroundColor" red="1" green="0.10928458108145311" blue="0.24938724182684224" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="V7Z-0W-06c"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMR-iH-aiV">
+                                    <rect key="frame" x="21" y="271" width="172" height="39"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="172" id="7qQ-Fu-TXD"/>
+                                        <constraint firstAttribute="height" constant="39" id="fgd-T2-KDM"/>
+                                    </constraints>
+                                    <state key="normal" title="立即购买" backgroundImage="bg_deal_purchaseButton">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" backgroundImage="bg_deal_purchaseButton_highlighted"/>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJ3-v2-k1c" userLabel="4个按钮背景">
+                                    <rect key="frame" x="0.0" y="320" width="390" height="80"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUQ-Qe-GT3">
+                                            <rect key="frame" x="0.0" y="0.0" width="195" height="40"/>
+                                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="第一个按钮" image="icon_detail_reviews">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JfH-hf-B05">
+                                            <rect key="frame" x="195" y="0.0" width="195" height="40"/>
+                                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="第二个按钮" image="icon_detail_reviews">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUR-gH-ffx">
+                                            <rect key="frame" x="0.0" y="40" width="195" height="40"/>
+                                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="第3个按钮" image="icon_detail_reviews">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUO-pX-XuR">
+                                            <rect key="frame" x="195" y="40" width="195" height="40"/>
+                                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="第四个按钮" image="icon_detail_reviews">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="1vU-6e-wP7"/>
+                                        <constraint firstAttribute="trailing" secondItem="AUO-pX-XuR" secondAttribute="trailing" id="3VL-rd-QAc"/>
+                                        <constraint firstItem="JfH-hf-B05" firstAttribute="top" secondItem="XJ3-v2-k1c" secondAttribute="top" id="3pu-6L-dbZ"/>
+                                        <constraint firstItem="OUR-gH-ffx" firstAttribute="height" secondItem="OUQ-Qe-GT3" secondAttribute="height" id="8IQ-gT-GLM"/>
+                                        <constraint firstItem="OUR-gH-ffx" firstAttribute="width" secondItem="AUO-pX-XuR" secondAttribute="width" id="Ap7-dv-Q3n"/>
+                                        <constraint firstItem="OUR-gH-ffx" firstAttribute="leading" secondItem="XJ3-v2-k1c" secondAttribute="leading" id="IQv-O0-IvY"/>
+                                        <constraint firstItem="OUR-gH-ffx" firstAttribute="height" secondItem="AUO-pX-XuR" secondAttribute="height" id="MKt-TO-2b9"/>
+                                        <constraint firstItem="OUR-gH-ffx" firstAttribute="width" secondItem="JfH-hf-B05" secondAttribute="width" id="NEt-yN-KzO"/>
+                                        <constraint firstAttribute="bottom" secondItem="AUO-pX-XuR" secondAttribute="bottom" id="P7V-EL-14p"/>
+                                        <constraint firstItem="OUR-gH-ffx" firstAttribute="width" secondItem="OUQ-Qe-GT3" secondAttribute="width" id="TiH-wK-tfE"/>
+                                        <constraint firstItem="OUQ-Qe-GT3" firstAttribute="top" secondItem="XJ3-v2-k1c" secondAttribute="top" id="Ujd-UJ-gz9"/>
+                                        <constraint firstItem="JfH-hf-B05" firstAttribute="leading" secondItem="OUQ-Qe-GT3" secondAttribute="trailing" id="aBL-zJ-b2G"/>
+                                        <constraint firstAttribute="trailing" secondItem="JfH-hf-B05" secondAttribute="trailing" id="day-CW-BOx"/>
+                                        <constraint firstItem="OUR-gH-ffx" firstAttribute="top" secondItem="OUQ-Qe-GT3" secondAttribute="bottom" id="hin-Yp-M2B"/>
+                                        <constraint firstItem="AUO-pX-XuR" firstAttribute="leading" secondItem="OUR-gH-ffx" secondAttribute="trailing" id="khe-rq-YN7"/>
+                                        <constraint firstItem="OUQ-Qe-GT3" firstAttribute="leading" secondItem="XJ3-v2-k1c" secondAttribute="leading" id="lDS-Eg-ug7"/>
+                                        <constraint firstItem="OUR-gH-ffx" firstAttribute="height" secondItem="JfH-hf-B05" secondAttribute="height" id="pa4-Gi-Zdh"/>
+                                        <constraint firstAttribute="bottom" secondItem="OUR-gH-ffx" secondAttribute="bottom" id="yOb-kE-U7e"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="2Go-Cd-TOe" secondAttribute="trailing" id="009-Ot-vIN"/>
+                                <constraint firstAttribute="trailing" secondItem="XJ3-v2-k1c" secondAttribute="trailing" id="4Pg-NW-nQq"/>
+                                <constraint firstItem="2Go-Cd-TOe" firstAttribute="top" secondItem="E86-Eo-THa" secondAttribute="bottom" constant="10" id="Cbo-aD-FeZ"/>
+                                <constraint firstItem="XJ3-v2-k1c" firstAttribute="leading" secondItem="SMa-4B-kvn" secondAttribute="leading" id="Mhe-CU-8HV"/>
+                                <constraint firstItem="E86-Eo-THa" firstAttribute="top" secondItem="SMa-4B-kvn" secondAttribute="top" id="Qaf-0b-9nc"/>
+                                <constraint firstItem="qMR-iH-aiV" firstAttribute="top" secondItem="2Go-Cd-TOe" secondAttribute="bottom" constant="10" id="Red-ai-el7"/>
+                                <constraint firstItem="E86-Eo-THa" firstAttribute="leading" secondItem="SMa-4B-kvn" secondAttribute="leading" id="Wh6-0t-okB"/>
+                                <constraint firstItem="XJ3-v2-k1c" firstAttribute="top" secondItem="qMR-iH-aiV" secondAttribute="bottom" constant="10" id="Xez-oa-7CQ"/>
+                                <constraint firstAttribute="trailing" secondItem="E86-Eo-THa" secondAttribute="trailing" id="c8S-R3-FSj"/>
+                                <constraint firstItem="qMR-iH-aiV" firstAttribute="leading" secondItem="SMa-4B-kvn" secondAttribute="leading" constant="21" id="gVl-8Y-uIS"/>
+                                <constraint firstItem="2Go-Cd-TOe" firstAttribute="leading" secondItem="SMa-4B-kvn" secondAttribute="leading" id="upj-Ma-AMM"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="F36-NO-dJM" firstAttribute="leading" secondItem="WGv-yG-GFX" secondAttribute="leading" id="Eeu-sF-8Nm"/>
                         <constraint firstAttribute="trailing" secondItem="F36-NO-dJM" secondAttribute="trailing" id="GCw-eF-D8T"/>
+                        <constraint firstItem="SMa-4B-kvn" firstAttribute="top" secondItem="F36-NO-dJM" secondAttribute="bottom" id="OY0-hy-fHk"/>
                         <constraint firstAttribute="width" constant="400" id="Spe-gh-FlV"/>
+                        <constraint firstAttribute="bottom" secondItem="SMa-4B-kvn" secondAttribute="bottom" id="WzY-g9-KTF"/>
+                        <constraint firstItem="SMa-4B-kvn" firstAttribute="leading" secondItem="WGv-yG-GFX" secondAttribute="leading" constant="10" id="Xkn-oi-vhG"/>
                         <constraint firstItem="F36-NO-dJM" firstAttribute="top" secondItem="WGv-yG-GFX" secondAttribute="top" id="cha-Bg-BNi"/>
+                        <constraint firstAttribute="trailing" secondItem="SMa-4B-kvn" secondAttribute="trailing" id="siR-Yn-OnB"/>
                     </constraints>
                 </view>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qs4-xX-ota">
+                    <rect key="frame" x="424" y="0.0" width="176" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="x4i-rJ-lmk"/>
+                    </connections>
+                </webView>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -107,8 +209,12 @@
         </label>
     </objects>
     <resources>
+        <image name="bg_deal_purchaseButton" width="5" height="5"/>
+        <image name="bg_deal_purchaseButton_highlighted" width="5" height="5"/>
         <image name="bg_navigationBar_normal" width="124" height="124"/>
         <image name="icon_back" width="30" height="30"/>
         <image name="icon_back_highlighted" width="30" height="30"/>
+        <image name="icon_detail_reviews" width="30" height="30"/>
+        <image name="placeholder_deal" width="273" height="172"/>
     </resources>
 </document>

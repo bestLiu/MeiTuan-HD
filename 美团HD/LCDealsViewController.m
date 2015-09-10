@@ -12,10 +12,8 @@
 #import "LCDealCell.h"
 #import "UIView+AutoLayout.h"
 #import "UIView+Extension.h"
-#import "LCConst.h"
 #import "SVProgressHUD.h"
 #import "MJExtension.h"
-#import "LCDeal.h"
 #import "LCDetailViewController.h"
 @interface LCDealsViewController ()<DPRequestDelegate>
 

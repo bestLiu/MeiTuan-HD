@@ -7,12 +7,12 @@
 //
 
 #import "LCDetailViewController.h"
-#import "LCDeal.h"
-#import "LCConst.h"
+#import "UIImageView+WebCache.h"
 
 @interface LCDetailViewController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingView;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 
 @end
 
@@ -24,6 +24,12 @@
 
     self.webView.hidden = YES;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.deal.deal_h5_url]]];
+    [self setupLeftSubViews];
+}
+
+- (void)setupLeftSubViews
+{
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.deal.image_url] placeholderImage:[UIImage imageNamed:@"placeholder_deal"]];
 }
 
 /**
@@ -63,14 +69,6 @@
     }
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -11,10 +11,9 @@
 #import "LCCity.h"
 #import "MJExtension.h"
 #import "LCcityGroup.h"
-#import "Masonry.h"
 #import "UIView+AutoLayout.h"
 #import "LCSearchResultTableViewController.h"
-#import "LCConst.h"
+
 
 @interface LCCityViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

@@ -7,10 +7,8 @@
 //
 
 #import "LCSortViewController.h"
-#import "LCTool.h"
 #import "LCSort.h"
 #import "UIView+Extension.h"
-#import "LCConst.h"
 
 #pragma mark - 自定义按钮,让一个按钮绑定一个排序模型
 @interface LCSortButton : UIButton
