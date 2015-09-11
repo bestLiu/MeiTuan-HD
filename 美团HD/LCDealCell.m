@@ -7,7 +7,6 @@
 //
 
 #import "LCDealCell.h"
-#import "LCDeal.h"
 #import "UIImageView+WebCache.h"
 
 @interface LCDealCell()

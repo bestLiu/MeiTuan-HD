@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "LCHomeCollectionViewController.h"
 #import "LCNavigationViewController.h"
+#include "AFNetworking.h"
+
 
 @interface AppDelegate ()
 
@@ -20,7 +22,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
-    
     LCHomeCollectionViewController *homeVc = [[LCHomeCollectionViewController alloc] init];
     LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:homeVc];
     

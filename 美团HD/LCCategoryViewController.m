@@ -9,10 +9,9 @@
 #import "LCCategoryViewController.h"
 #import "LCHomeDropView.h"
 #import "LCCategory.h"
-#import "LCTool.h"
 #import "MJExtension.h"
 #import "UIView+Extension.h"
-#import "LCConst.h"
+
 
 
 @interface LCCategoryViewController ()<LCHomeDropViewDataSource, LCHomeDropViewDelegate>

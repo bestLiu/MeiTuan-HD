@@ -7,9 +7,7 @@
 //
 
 #import "LCSearchResultTableViewController.h"
-#import "LCConst.h"
 #import "LCCity.h"
-#import "LCTool.h"
 
 @interface LCSearchResultTableViewController ()
 

@@ -12,7 +12,6 @@
 #import "LCCityViewController.h"
 #import "LCNavigationViewController.h"
 #import "LCRegion.h"
-#import "LCConst.h"
 
 @interface LCDistrictViewController ()<LCHomeDropViewDataSource, LCHomeDropViewDelegate>
 - (IBAction)changeCity;

@@ -12,11 +12,9 @@
 #import "LCDealCell.h"
 #import "UIView+AutoLayout.h"
 #import "UIView+Extension.h"
-#import "LCConst.h"
 #import "SVProgressHUD.h"
 #import "MJExtension.h"
-#import "LCDeal.h"
-#import "LCDetailViewController.h"
+//#import "LCDetailViewController.h"
 @interface LCDealsViewController ()<DPRequestDelegate>
 
 @property (nonatomic, weak) DPRequest *lastRequest;
@@ -173,9 +171,9 @@ static NSString * const reuseIdentifier = @"deal";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    LCDetailViewController *detailVc = [[LCDetailViewController alloc] init];
-    detailVc.deal = self.deals[indexPath.item];
-    [self presentViewController:detailVc animated:YES completion:nil];
+//    LCDetailViewController *detailVc = [[LCDetailViewController alloc] init];
+//    detailVc.deal = self.deals[indexPath.item];
+//    [self presentViewController:detailVc animated:YES completion:nil];
 }
 
 @end
