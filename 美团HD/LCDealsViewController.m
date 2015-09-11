@@ -14,7 +14,7 @@
 #import "UIView+Extension.h"
 #import "SVProgressHUD.h"
 #import "MJExtension.h"
-//#import "LCDetailViewController.h"
+#import "LCDetailViewController.h"
 @interface LCDealsViewController ()<DPRequestDelegate>
 
 @property (nonatomic, weak) DPRequest *lastRequest;
@@ -155,7 +155,7 @@ static NSString * const reuseIdentifier = @"deal";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"self.deals.count %d",self.deals.count);
+
     return self.deals.count;
 }
 
@@ -171,9 +171,9 @@ static NSString * const reuseIdentifier = @"deal";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    LCDetailViewController *detailVc = [[LCDetailViewController alloc] init];
-//    detailVc.deal = self.deals[indexPath.item];
-//    [self presentViewController:detailVc animated:YES completion:nil];
+    LCDetailViewController *detailVc = [[LCDetailViewController alloc] init];
+    detailVc.deal = self.deals[indexPath.item];
+    [self presentViewController:detailVc animated:YES completion:nil];
 }
 
 @end
