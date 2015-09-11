@@ -1,15 +1,12 @@
 //
-//  LCDetailViewController.h
+//  MTDetailViewController.h
 //  美团HD
 //
-//  Created by mac1 on 15/9/10.
-//  Copyright (c) 2015年 BNDK. All rights reserved.
+//  Created by apple on 14/11/27.
+//  Copyright (c) 2014年 heima. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-@class LCDeal;
-
-@interface LCDetailViewController : UIViewController
+@interface MTDetailViewController : UIViewController
 @property (nonatomic, strong) LCDeal *deal;
-
 @end
