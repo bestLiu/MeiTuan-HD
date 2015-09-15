@@ -15,10 +15,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *descLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *listPriceLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *checkImageView;
 @property (weak, nonatomic) IBOutlet UILabel *purchaseCountLabel;
 /**
  属性名不能以new开头
  */
+@property (weak, nonatomic) IBOutlet UIButton *coverButton;
 @property (weak, nonatomic) IBOutlet UIImageView *dealNewView; 
 @end
 
@@ -30,6 +32,7 @@
 //    self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_dealcell"]];
     // 平铺
     //self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_dealcell"]];
+    self.checkImageView.hidden = YES;
 }
 
 - (void)setDeal:(LCDeal *)deal
@@ -63,7 +66,29 @@
     fomatter.dateFormat = @"yyyy-MM-dd";
     NSString *nowStr = [fomatter stringFromDate:now];
     self.dealNewView.hidden = ([deal.publish_date compare:nowStr] == NSOrderedAscending);//比今天小就隐藏
+    
+    
+    //根据模型属性来控制cover的显示和隐藏
+    self.coverButton.hidden = !deal.editing;
+    
+    //根据模型属性控制打钩的显示与否
+    self.checkImageView.hidden = !deal.ischecking;
 }
+
+
+- (IBAction)coverViewClick:(id)sender
+{
+    //设置模型
+    self.deal.checking = !self.deal.ischecking;
+    
+    //修改状态
+    self.checkImageView.hidden = !self.checkImageView.hidden;
+    
+    if ([self.delegate respondsToSelector:@selector(dealCellCheckingStateDidChange:)]) {
+        [self.delegate dealCellCheckingStateDidChange:self];
+    }
+}
+
 
 - (void)drawRect:(CGRect)rect
 {

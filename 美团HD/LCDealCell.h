@@ -8,8 +8,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@class LCDealCell;
+
+@protocol LCDealCellDelegate <NSObject>
+
+@optional
+- (void)dealCellCheckingStateDidChange:(LCDealCell *)cell;
+
+@end
 
 @interface LCDealCell : UICollectionViewCell
 @property (nonatomic, strong) LCDeal *deal;
+@property (nonatomic, weak) id<LCDealCellDelegate> delegate;
 
 @end

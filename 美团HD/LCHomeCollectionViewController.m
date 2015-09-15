@@ -305,7 +305,7 @@
     menu.contentImage = [UIImage imageNamed:@"icon_pathMenu_cross_normal"];
     
     // 完全显示
-    menu.alpha = 1.0;
+    menu.alpha = 0.5;
 }
 
 - (void)awesomeMenuWillAnimateClose:(AwesomeMenu *)menu
@@ -319,6 +319,7 @@
 
 - (void)awesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx
 {
+    menu.alpha = 0.5;
     // 替换菜单的图片
     menu.contentImage = [UIImage imageNamed:@"icon_pathMenu_mainMine_normal"];
     

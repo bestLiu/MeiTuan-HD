@@ -14,13 +14,14 @@
 #import "LCDealTool.h"
 #import "UIView+Extension.h"
 #import "LCDetailViewController.h"
+#import "LCDeal.h"
 
 
 NSString *const MTDone = @"完成";
 NSString *const MTEdit = @"编辑";
 #define MTString(str) [NSString stringWithFormat:@"  %@  ", str]
 
-@interface LCCollectViewController ()
+@interface LCCollectViewController ()<LCDealCellDelegate>
 @property (nonatomic, weak) UIImageView *noDataView;
 @property (nonatomic, strong) NSMutableArray *deals;
 @property (nonatomic, assign) int currentPage;
@@ -59,6 +60,7 @@ NSString *const MTEdit = @"编辑";
 {
     if (!_removeItem) {
         self.removeItem = [[UIBarButtonItem alloc] initWithTitle:MTString(@"删除") style:UIBarButtonItemStyleDone target:self action:@selector(remove)];
+        self.removeItem.enabled = NO;
     }
     return _removeItem;
 }
@@ -123,10 +125,55 @@ static NSString * const reuseIdentifier = @"deal";
     if ([item.title isEqualToString:MTEdit]) {
         item.title = MTDone;
         self.navigationItem.leftBarButtonItems = @[self.backItem, self.selectAllItem, self.unselectAllItem, self.removeItem];
+        
+        //进入编辑状态,让cell的蒙版出来
+        for (LCDeal *deal in self.deals) {
+            deal.editing = YES;
+        }
+        
     } else {
         item.title = MTEdit;
         self.navigationItem.leftBarButtonItems = @[self.backItem];
+        
+        for (LCDeal *deal in self.deals) {
+            deal.editing = NO;
+        }
     }
+    
+    //刷新表格
+    [self.collectionView reloadData];
+}
+
+- (void)selectAll
+{
+    for (LCDeal *deal in self.deals) {
+        deal.checking = YES;
+    }
+    self.removeItem.enabled = YES;//只要点击全选删除按钮可用
+    [self.collectionView reloadData];
+}
+- (void)unselectAll
+{
+    for (LCDeal *deal in self.deals) {
+        deal.checking = NO;
+    }
+    self.removeItem.enabled = NO;//点全部选删除按钮不可用
+    [self.collectionView reloadData];
+}
+- (void)remove
+{
+    NSMutableArray *temArray = [NSMutableArray array];
+    for (LCDeal *deal in self.deals) {
+        if (deal.checking) {
+            [LCDealTool removeCollect:deal];
+            [temArray addObject:deal];
+        }
+    }
+    
+    //删除所有打钩的模型
+    [self.deals removeObjectsInArray:temArray];
+    self.removeItem.enabled = NO;//删除按钮不可用
+    [self.collectionView reloadData];
 }
 
 - (void)loadMoreDeals
@@ -199,7 +246,7 @@ static NSString * const reuseIdentifier = @"deal";
     LCDealCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     cell.deal = self.deals[indexPath.item];
-    
+    cell.delegate = self;
     return cell;
 }
 
@@ -209,6 +256,19 @@ static NSString * const reuseIdentifier = @"deal";
     LCDetailViewController *detailVc = [[LCDetailViewController alloc] init];
     detailVc.deal = self.deals[indexPath.item];
     [self presentViewController:detailVc animated:YES completion:nil];
+}
+#pragma mark d-ealCellDelegate
+- (void)dealCellCheckingStateDidChange:(LCDealCell *)cell
+{
+    //删除按钮能否点击
+    BOOL hasChecking = NO;
+    for (LCDeal *deal in self.deals) {
+        if (deal.ischecking) {
+            hasChecking = YES;
+            break;
+        }
+    }
+    self.removeItem.enabled = hasChecking;
 }
 
 

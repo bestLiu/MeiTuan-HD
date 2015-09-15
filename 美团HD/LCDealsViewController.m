@@ -49,7 +49,7 @@ static NSString * const reuseIdentifier = @"deal";
     
     //添加没有数据提醒
     UIImageView *nodataView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_deals_empty"]];
-    nodataView.hidden = YES;
+    nodataView.hidden = NO;
     [self.view addSubview:nodataView];
     [nodataView autoCenterInSuperview];//直接让它在父控件中央
     self.nodataView = nodataView;

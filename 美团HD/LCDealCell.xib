@@ -92,23 +92,44 @@
                             <constraint firstAttribute="height" constant="24" id="wjN-Ky-uCh"/>
                         </constraints>
                     </imageView>
+                    <button hidden="YES" opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9EI-MA-bR0" userLabel=" 遮盖">
+                        <rect key="frame" x="0.0" y="0.0" width="305" height="305"/>
+                        <color key="backgroundColor" red="0.53145216409999996" green="1" blue="0.74999086479999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="coverViewClick:" destination="leD-CM-6Zm" eventType="touchUpInside" id="mBG-5o-pOR"/>
+                        </connections>
+                    </button>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_choosed" translatesAutoresizingMaskIntoConstraints="NO" id="oIo-Ji-FuH" userLabel="选中图片">
+                        <rect key="frame" x="279" y="279" width="26" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="26" id="RtM-xb-jnW"/>
+                            <constraint firstAttribute="height" constant="26" id="hV6-RZ-ryr"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="oIo-Ji-FuH" secondAttribute="bottom" id="6We-vm-bqP"/>
                 <constraint firstAttribute="bottom" secondItem="a5S-9d-0ff" secondAttribute="bottom" constant="10" id="Db4-HB-ft9"/>
                 <constraint firstItem="a5S-9d-0ff" firstAttribute="leading" secondItem="leD-CM-6Zm" secondAttribute="leading" constant="10" id="HcG-F1-Zbe"/>
                 <constraint firstAttribute="trailing" secondItem="a5S-9d-0ff" secondAttribute="trailing" constant="10" id="PyO-lA-tfm"/>
                 <constraint firstAttribute="trailing" secondItem="L2U-Fs-ESo" secondAttribute="trailing" constant="5" id="URe-bT-rod"/>
                 <constraint firstItem="L2U-Fs-ESo" firstAttribute="top" secondItem="leD-CM-6Zm" secondAttribute="top" constant="5" id="bdt-Mb-Mlb"/>
                 <constraint firstItem="a5S-9d-0ff" firstAttribute="top" secondItem="L2U-Fs-ESo" secondAttribute="bottom" constant="10" id="gem-QM-9UQ"/>
+                <constraint firstAttribute="trailing" secondItem="oIo-Ji-FuH" secondAttribute="trailing" id="hcx-aJ-jve"/>
                 <constraint firstItem="AhP-s0-XNA" firstAttribute="leading" secondItem="leD-CM-6Zm" secondAttribute="leading" id="jPv-g0-GSe"/>
                 <constraint firstItem="AhP-s0-XNA" firstAttribute="top" secondItem="leD-CM-6Zm" secondAttribute="top" id="udC-cr-UYF"/>
                 <constraint firstItem="L2U-Fs-ESo" firstAttribute="leading" secondItem="leD-CM-6Zm" secondAttribute="leading" constant="5" id="yeU-T0-pyo"/>
             </constraints>
             <size key="customSize" width="305" height="305"/>
             <connections>
+                <outlet property="checkImageView" destination="oIo-Ji-FuH" id="LhR-qo-RLv"/>
+                <outlet property="coverButton" destination="9EI-MA-bR0" id="C1I-y4-ufd"/>
                 <outlet property="currentPriceLabel" destination="Svs-aR-Kgo" id="QW5-sZ-dlb"/>
                 <outlet property="dealNewView" destination="AhP-s0-XNA" id="bKJ-gq-vfd"/>
                 <outlet property="descLabel" destination="E92-eQ-xc2" id="v7P-Ig-Abh"/>
@@ -117,10 +138,11 @@
                 <outlet property="purchaseCountLabel" destination="zjf-mc-esg" id="2ee-Bj-vNt"/>
                 <outlet property="titleLabel" destination="FXO-D1-08B" id="TtD-vw-nnY"/>
             </connections>
-            <point key="canvasLocation" x="440.5" y="215.5"/>
+            <point key="canvasLocation" x="268.5" y="208.5"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="ic_choosed" width="26" height="26"/>
         <image name="ic_deal_new" width="38" height="24"/>
         <image name="placeholder_deal" width="273" height="172"/>
     </resources>

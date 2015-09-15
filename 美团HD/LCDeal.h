@@ -38,4 +38,8 @@
 
 @property (nonatomic, strong) LCRestrictions *restrictions;
 
+@property (nonatomic, assign, getter=isediting) BOOL editing;
+
+@property (nonatomic, assign, getter=ischecking) BOOL checking;
+
 @end
