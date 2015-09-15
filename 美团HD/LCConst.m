@@ -10,6 +10,11 @@ NSString *const LCCategoryDidChangeNotification = @"LCCategoryDidChangeNotificat
 NSString *const LCCategorySelectKey = @"LCCategorySelectKey";
 NSString *const LCSubCategorySelectKey = @"LCSubCategorySelectKey";
 
-extern NSString *const LCRegionDidChangeNotification = @"LCRegionDidChangeNotification";
-extern NSString *const LCRegionSelectKey = @"LCRegionSelectKey";
-extern NSString *const LCSubRegionSelectKey = @"LCSubRegionSelectKey";
+NSString *const LCRegionDidChangeNotification = @"LCRegionDidChangeNotification";
+NSString *const LCRegionSelectKey = @"LCRegionSelectKey";
+NSString *const LCSubRegionSelectKey = @"LCSubRegionSelectKey";
+
+
+NSString *const LCCollectStateDidChangeNotification = @"LCCollectStateDidChangeNotification";
+NSString *const LCCollectDealKey = @"LCCollectDealKey";
+NSString *const LCIsCollectKey = @"LCIsCollectKey";

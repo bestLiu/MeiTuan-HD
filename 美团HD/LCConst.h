@@ -18,7 +18,6 @@ extern NSString *const LCCitySelectCityKey;
 extern NSString *const LCSortDidChangeNotification;
 extern NSString *const LCSortSelectKey;
 
-
 extern NSString *const LCCategoryDidChangeNotification;
 extern NSString *const LCCategorySelectKey;
 extern NSString *const LCSubCategorySelectKey;
@@ -26,3 +25,7 @@ extern NSString *const LCSubCategorySelectKey;
 extern NSString *const LCRegionDidChangeNotification;
 extern NSString *const LCRegionSelectKey;
 extern NSString *const LCSubRegionSelectKey;
+
+extern NSString *const LCCollectStateDidChangeNotification;
+extern NSString *const LCIsCollectKey;
+extern NSString *const LCCollectDealKey;

@@ -1,5 +1,5 @@
 //
-//  MTDealCell.m
+//  LCDealCell.m
 //  美团HD
 //
 //  Created by apple on 14-8-19.

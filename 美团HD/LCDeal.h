@@ -7,6 +7,7 @@
 // 团购模型
 
 #import <Foundation/Foundation.h>
+@class LCRestrictions;
 
 @interface LCDeal : NSObject
 /** 团购单ID */
@@ -28,8 +29,13 @@
 /** 小尺寸团购图片链接，最大图片尺寸160×100 */
 @property (copy, nonatomic) NSString *s_image_url;
 
+/** string	团购单的截止购买日期 */
+@property (nonatomic, copy) NSString *purchase_deadline;
+
 @property (copy, nonatomic) NSString *publish_date;
 
 @property (nonatomic, copy) NSString *deal_h5_url;
+
+@property (nonatomic, strong) LCRestrictions *restrictions;
 
 @end

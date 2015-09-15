@@ -10,11 +10,11 @@
 #import "DPAPI.h"
 #import "MJExtension.h"
 #import "SVProgressHUD.h"
-//#import "MTRestrictions.h"
-//#import "MTDealTool.h"
+#import "LCRestrictions.h"
+#import "UIImageView+WebCache.h"
+#import "LCDealTool.h"
 
 @interface LCDetailViewController () <UIWebViewDelegate, DPRequestDelegate>
-
 
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -25,6 +25,8 @@
 - (IBAction)buy;
 - (IBAction)collect;
 - (IBAction)share;
+@property (weak, nonatomic) IBOutlet UIButton *solodNumBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UIButton *collectButton;
 @property (weak, nonatomic) IBOutlet UIButton *refundableAnyTimeButton;
 @property (weak, nonatomic) IBOutlet UIButton *refundableExpireButton;
@@ -46,21 +48,23 @@
     // 设置基本信息
     self.titleLabel.text = self.deal.title;
     self.descLabel.text = self.deal.desc;
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.deal.image_url]];
+    [self.solodNumBtn setTitle:[NSString stringWithFormat:@"已售出%d",self.deal.purchase_count] forState:UIControlStateNormal];
     
-//    // 设置剩余时间
-//    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-//    fmt.dateFormat = @"yyyy-MM-dd";
-//    NSDate *dead = [fmt dateFromString:self.deal.purchase_deadline];
-//    // 追加1天
-//    dead = [dead dateByAddingTimeInterval:24 * 60 * 60];
-//    NSDate *now = [NSDate date];
-//    NSCalendarUnit unit = NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute;
-//    NSDateComponents *cmps = [[NSCalendar currentCalendar] components:unit fromDate:now toDate:dead options:0];
-//    if (cmps.day > 365) {
-//        [self.leftTimeButton setTitle:@"一年内不过期" forState:UIControlStateNormal];
-//    } else {
-//        [self.leftTimeButton setTitle:[NSString stringWithFormat:@"%d天%d小时%d分钟", cmps.day, cmps.hour, cmps.minute] forState:UIControlStateNormal];
-//    }
+    // 设置剩余时间
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd";
+    NSDate *dead = [fmt dateFromString:self.deal.purchase_deadline];
+    // 追加1天
+    dead = [dead dateByAddingTimeInterval:24 * 60 * 60];
+    NSDate *now = [NSDate date];
+    NSCalendarUnit unit = NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute;
+    NSDateComponents *cmps = [[NSCalendar currentCalendar] components:unit fromDate:now toDate:dead options:0];
+    if (cmps.day > 365) {
+        [self.leftTimeButton setTitle:@"一年内不过期" forState:UIControlStateNormal];
+    } else {
+        [self.leftTimeButton setTitle:[NSString stringWithFormat:@"%ld天%ld小时%ld分钟", cmps.day, cmps.hour, cmps.minute] forState:UIControlStateNormal];
+    }
     
     // 发送请求获得更详细的团购数据
     DPAPI *api = [[DPAPI alloc] init];
@@ -69,8 +73,9 @@
     params[@"deal_id"] = self.deal.deal_id;
     [api requestWithURL:@"v1/deal/get_single_deal" params:params delegate:self];
     
+    
     // 设置收藏状态
-  //  self.collectButton.selected = [MTDealTool isCollected:self.deal];
+    self.collectButton.selected = [LCDealTool isCollect:self.deal];
 }
 
 /**
@@ -82,13 +87,14 @@
 }
 
 #pragma mark - DPRequestDelegate
-//- (void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result
-//{
-//    self.deal = [LCDeal objectWithKeyValues:[result[@"deals"] firstObject]];
-//    // 设置退款信息
-//    self.refundableAnyTimeButton.selected = self.deal.restrictions.is_refundable;
-//    self.refundableExpireButton.selected = self.deal.restrictions.is_refundable;
-//}
+- (void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result
+{
+    //MJExtension的使用，将数据转换成模型
+    self.deal = [LCDeal objectWithKeyValues:[result[@"deals"] firstObject]];
+    // 设置退款信息
+    self.refundableAnyTimeButton.selected = self.deal.restrictions.is_refundable;
+    self.refundableExpireButton.selected = self.deal.restrictions.is_refundable;
+}
 
 - (void)request:(DPRequest *)request didFailWithError:(NSError *)error
 {
@@ -136,28 +142,28 @@
     
 }
 
-//- (IBAction)collect {
-//    NSMutableDictionary *info = [NSMutableDictionary dictionary];
-//    info[MTCollectDealKey] = self.deal;
-//    
-//    if (self.collectButton.isSelected) { // 取消收藏
-//        [MTDealTool removeCollectDeal:self.deal];
-//        [MBProgressHUD showSuccess:@"取消收藏成功" toView:self.view];
-//        
-//        info[MTIsCollectKey] = @NO;
-//    } else { // 收藏
-//        [MTDealTool addCollectDeal:self.deal];
-//        [MBProgressHUD showSuccess:@"收藏成功" toView:self.view];
-//        
-//        info[MTIsCollectKey] = @YES;
-//    }
-//    
-//    // 按钮的选中取反
-//    self.collectButton.selected = !self.collectButton.isSelected;
-//    
-//    // 发出通知
-//    [MTNotificationCenter postNotificationName:MTCollectStateDidChangeNotification object:nil userInfo:info];
-//}
+- (IBAction)collect {
+    NSMutableDictionary *info = [NSMutableDictionary dictionary];
+    info[LCCollectDealKey] = self.deal;
+
+    if (self.collectButton.isSelected) { // 取消收藏
+        [LCDealTool removeCollect:self.deal];
+        [SVProgressHUD showSuccessWithStatus:@"取消收藏成功"];
+        
+        info[LCIsCollectKey] = @NO;
+    } else { // 收藏
+        [LCDealTool addCollect:self.deal];
+        [SVProgressHUD showSuccessWithStatus:@"收藏成功"];
+        
+        info[LCIsCollectKey] = @YES;
+    }
+    
+    // 按钮的选中取反
+    self.collectButton.selected = !self.collectButton.isSelected;
+    
+    // 发出通知
+    [LCNotifiCationCenter postNotificationName:LCCollectStateDidChangeNotification object:nil userInfo:info];
+}
 
 - (IBAction)share {
     

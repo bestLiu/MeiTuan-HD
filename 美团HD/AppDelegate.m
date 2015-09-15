@@ -22,6 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
+    NSString *file = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSLog(@"Documents路径--->>>%@",file);
     LCHomeCollectionViewController *homeVc = [[LCHomeCollectionViewController alloc] init];
     LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:homeVc];
     
