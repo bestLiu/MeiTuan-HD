@@ -13,6 +13,10 @@
 #import "LCRestrictions.h"
 #import "UIImageView+WebCache.h"
 #import "LCDealTool.h"
+#import "AlixLibService.h"
+#import "AlixPayOrder.h"
+#import "DataSigner.h"
+#import "PartnerConfig.h"
 
 @interface LCDetailViewController () <UIWebViewDelegate, DPRequestDelegate>
 
@@ -63,7 +67,7 @@
     if (cmps.day > 365) {
         [self.leftTimeButton setTitle:@"一年内不过期" forState:UIControlStateNormal];
     } else {
-        [self.leftTimeButton setTitle:[NSString stringWithFormat:@"%ld天%ld小时%ld分钟", cmps.day, cmps.hour, cmps.minute] forState:UIControlStateNormal];
+        [self.leftTimeButton setTitle:[NSString stringWithFormat:@"%d天%d小时%d分钟", cmps.day, cmps.hour, cmps.minute] forState:UIControlStateNormal];
     }
     
     // 发送请求获得更详细的团购数据
@@ -139,6 +143,37 @@
 }
 
 - (IBAction)buy {
+    //跳转到大众点评页面购买
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.deal.deal_url]];
+    
+    
+    /*
+// 集成支付宝
+    // 1.生成订单信息
+    // 订单信息 == order == [order description]
+    AlixPayOrder *order = [[AlixPayOrder alloc] init];
+    order.productName = self.deal.title;
+    order.productDescription = self.deal.desc;
+    order.partner = PartnerID;
+    order.seller = SellerID;
+    order.amount = [self.deal.current_price description];
+    
+    // 2.签名加密
+    id<DataSigner> signer = CreateRSADataSigner(PartnerPrivKey);
+    // 签名信息 == signedString
+    NSString *signedString = [signer signString:[order description]];
+    
+    // 3.利用订单信息、签名信息、签名类型生成一个订单字符串
+    NSString *orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                             [order description], signedString, @"RSA"];
+    
+    // 4.打开客户端,进行支付(商品名称,商品价格,商户信息)，跳转到网页支付会回调getResult方法，返回支付结果
+    [AlixLibService payOrder:orderString AndScheme:@"tuangou" seletor:@selector(getResult:) target:self];
+    */
+}
+
+- (void)getResult:(NSString *)result
+{
     
 }
 

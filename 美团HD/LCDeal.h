@@ -36,6 +36,8 @@
 
 @property (nonatomic, copy) NSString *deal_h5_url;
 
+@property (nonatomic, copy) NSString *deal_url;
+
 @property (nonatomic, strong) LCRestrictions *restrictions;
 
 @property (nonatomic, assign, getter=isediting) BOOL editing;
