@@ -24,6 +24,7 @@
 #import "LCNavigationViewController.h"
 #import "LCRecentViewController.h"
 #import "LCCollectViewController.h"
+#import "LCMapViewController.h"
 
 @interface LCHomeCollectionViewController ()<AwesomeMenuDelegate>
 
@@ -49,21 +50,43 @@
 
 @implementation LCHomeCollectionViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+        [self setupNotificaion];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
 //    self.view == self.collectionView.superview
- 
-    
-    
-    [self setupNotificaion];
     
     [self setupLeftNav];
     [self setupRightNav];
     
     //创建AweSomeMenu
     [self setAwesomeMenu];
-   
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [LCNotifiCationCenter removeObserver:self];
+}
+
+- (void)setupNotificaion
+{
+    
+    //监听城市改变
+    [LCNotifiCationCenter addObserver:self selector:@selector(cityChange:) name:LCCityDidSelectNotification object:nil];
+    
+    //监听排序改变
+    [LCNotifiCationCenter addObserver:self selector:@selector(sortChange:) name:LCSortDidChangeNotification object:nil];
+    
+    //监听分类改变
+    [LCNotifiCationCenter addObserver:self selector:@selector(categoryChange:) name:LCCategoryDidChangeNotification object:nil];
+    
+    //监听区域改变
+    [LCNotifiCationCenter addObserver:self selector:@selector(regionChange:) name:LCRegionDidChangeNotification object:nil];
 }
 - (void)setAwesomeMenu
 {
@@ -95,21 +118,7 @@
     [menu autoSetDimensionsToSize:CGSizeMake(200, 200)];//设置尺寸
 }
 
-- (void)setupNotificaion
-{
-    
-    //监听城市改变
-    [LCNotifiCationCenter addObserver:self selector:@selector(cityChange:) name:LCCityDidSelectNotification object:nil];
-    
-    //监听排序改变
-    [LCNotifiCationCenter addObserver:self selector:@selector(sortChange:) name:LCSortDidChangeNotification object:nil];
-    
-    //监听分类改变
-    [LCNotifiCationCenter addObserver:self selector:@selector(categoryChange:) name:LCCategoryDidChangeNotification object:nil];
-    
-    //监听区域改变
-    [LCNotifiCationCenter addObserver:self selector:@selector(regionChange:) name:LCRegionDidChangeNotification object:nil];
-}
+
 - (void)setupLeftNav
 {
     // 1、logo
@@ -140,7 +149,7 @@
 }
 - (void)setupRightNav
 {
-    UIBarButtonItem *mapItem = [UIBarButtonItem itemWithTarget:nil action:nil image:@"icon_map" highImage:@"icon_map_highlighted"];
+    UIBarButtonItem *mapItem = [UIBarButtonItem itemWithTarget:self action:@selector(mapItemClick) image:@"icon_map" highImage:@"icon_map_highlighted"];
     UIBarButtonItem *searchItem = [UIBarButtonItem itemWithTarget:self action:@selector(searchClick) image:@"icon_search" highImage:@"icon_search_highlighted"];
     mapItem.customView.width = 60;
     searchItem.customView.width = 60;
@@ -178,6 +187,13 @@
     UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[[LCSortViewController alloc] init]];
     [popover presentPopoverFromBarButtonItem:self.sortItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     self.sortPopover = popover;
+}
+
+- (void)mapItemClick
+{
+    LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:[[LCMapViewController alloc] init]];
+    [self presentViewController:nav animated:YES completion:nil];
+    
 }
 - (void)searchClick
 {
@@ -340,8 +356,6 @@
             break;
     }
 }
-
-
 
 - (void)dealloc
 {

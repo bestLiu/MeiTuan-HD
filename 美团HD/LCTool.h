@@ -6,7 +6,10 @@
 //  Copyright (c) 2015年 BNDK. All rights reserved.
 // 元数据工具类：管理所有的元数据
 
+
 #import <Foundation/Foundation.h>
+#import "LCDeal.h"
+#import "LCCategory.h"
 
 @interface LCTool : NSObject
 
@@ -18,6 +21,7 @@
 + (NSArray *)cities;
 
 + (NSArray *)categories;
++ (LCCategory *)categoryWithDeal:(LCDeal *)deal;
 
 + (NSArray *)sorts;
 

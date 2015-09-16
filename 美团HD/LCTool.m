@@ -8,7 +8,6 @@
 
 #import "LCTool.h"
 #import "LCCity.h"
-#import "LCCategory.h"
 #import "MJExtension.h"
 #import "LCSort.h"
 
@@ -41,5 +40,21 @@ static NSArray *_sorts;
         _sorts = [LCSort objectArrayWithFilename:@"sorts.plist"];
     }
     return _sorts;
+}
+
++ (LCCategory *)categoryWithDeal:(LCDeal *)deal
+{
+    NSArray *category = [self categories];
+    NSString *cname = [deal.categories firstObject];
+    for (LCCategory *ct in category) {
+        if ([ct.name isEqualToString:cname]) {
+            return ct;
+        }
+        if ([ct.subcategories containsObject:cname]) {
+            return ct;
+        }
+    }
+    
+    return nil;
 }
 @end

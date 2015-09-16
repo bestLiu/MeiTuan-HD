@@ -90,6 +90,10 @@
 		897BC5151BA90FBD0079B412 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 897BC5041BA90FBD0079B412 /* SBJsonWriter.m */; };
 		897BC5161BA90FBD0079B412 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 897BC5051BA90FBD0079B412 /* libcrypto.a */; };
 		897BC5171BA90FBD0079B412 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 897BC5061BA90FBD0079B412 /* libssl.a */; };
+		897BC51C1BA91C0C0079B412 /* LCMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897BC51A1BA91C0C0079B412 /* LCMapViewController.m */; };
+		897BC51D1BA91C0C0079B412 /* LCMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897BC51B1BA91C0C0079B412 /* LCMapViewController.xib */; };
+		897BC5201BA948810079B412 /* LCBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = 897BC51F1BA948810079B412 /* LCBusiness.m */; };
+		897BC5241BA94A5A0079B412 /* LCDealAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 897BC5231BA94A5A0079B412 /* LCDealAnnotation.m */; };
 		89AC76AC1B9FCAB4000B7B6C /* DPAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC76A81B9FCAB4000B7B6C /* DPAPI.m */; };
 		89AC76AD1B9FCAB4000B7B6C /* DPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC76AB1B9FCAB4000B7B6C /* DPRequest.m */; };
 		89AC76D01B9FCAB8000B7B6C /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC76B01B9FCAB8000B7B6C /* MKAnnotationView+WebCache.m */; };
@@ -307,6 +311,13 @@
 		897BC5071BA90FBD0079B412 /* PartnerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartnerConfig.h; sourceTree = "<group>"; };
 		897BC5091BA90FBD0079B412 /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
 		897BC50A1BA90FBD0079B412 /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
+		897BC5191BA91C0C0079B412 /* LCMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMapViewController.h; sourceTree = "<group>"; };
+		897BC51A1BA91C0C0079B412 /* LCMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMapViewController.m; sourceTree = "<group>"; };
+		897BC51B1BA91C0C0079B412 /* LCMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCMapViewController.xib; sourceTree = "<group>"; };
+		897BC51E1BA948810079B412 /* LCBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCBusiness.h; sourceTree = "<group>"; };
+		897BC51F1BA948810079B412 /* LCBusiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCBusiness.m; sourceTree = "<group>"; };
+		897BC5221BA94A5A0079B412 /* LCDealAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCDealAnnotation.h; sourceTree = "<group>"; };
+		897BC5231BA94A5A0079B412 /* LCDealAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCDealAnnotation.m; sourceTree = "<group>"; };
 		89AC76A71B9FCAB4000B7B6C /* DPAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPAPI.h; sourceTree = "<group>"; };
 		89AC76A81B9FCAB4000B7B6C /* DPAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPAPI.m; sourceTree = "<group>"; };
 		89AC76A91B9FCAB4000B7B6C /* DPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPConstants.h; sourceTree = "<group>"; };
@@ -759,6 +770,26 @@
 			path = RSA;
 			sourceTree = "<group>";
 		};
+		897BC5181BA91BDD0079B412 /* Map 【地图】 */ = {
+			isa = PBXGroup;
+			children = (
+				897BC5211BA94A050079B412 /* Model */,
+				897BC5191BA91C0C0079B412 /* LCMapViewController.h */,
+				897BC51A1BA91C0C0079B412 /* LCMapViewController.m */,
+				897BC51B1BA91C0C0079B412 /* LCMapViewController.xib */,
+			);
+			name = "Map 【地图】";
+			sourceTree = "<group>";
+		};
+		897BC5211BA94A050079B412 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				897BC5221BA94A5A0079B412 /* LCDealAnnotation.h */,
+				897BC5231BA94A5A0079B412 /* LCDealAnnotation.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		89AC76A61B9FCAB4000B7B6C /* dianpingapi */ = {
 			isa = PBXGroup;
 			children = (
@@ -906,6 +937,7 @@
 				895324121BA157B40019B325 /* Detail 【团购详情】 */,
 				89011DCF1BA0367700612B20 /* Collect 【收藏】 */,
 				89011DD31BA036A400612B20 /* Recent 【最近浏览】 */,
+				897BC5181BA91BDD0079B412 /* Map 【地图】 */,
 				89D0FCDC1B9C35D900731253 /* Images.xcassets */,
 			);
 			name = Classes;
@@ -939,6 +971,8 @@
 				896E5E661B9D3E84008F7A2F /* LCCategory.m */,
 				89AC76E21B9FD44A000B7B6C /* LCDeal.h */,
 				89AC76E31B9FD44A000B7B6C /* LCDeal.m */,
+				897BC51E1BA948810079B412 /* LCBusiness.h */,
+				897BC51F1BA948810079B412 /* LCBusiness.m */,
 				897A4DB41BA65CC2005E2B4F /* LCRestrictions.h */,
 				897A4DB51BA65CC2005E2B4F /* LCRestrictions.m */,
 			);
@@ -1044,6 +1078,7 @@
 				896E5E5F1B9D3D73008F7A2F /* categories.plist in Resources */,
 				896E5E751B9D77FA008F7A2F /* LCDistrictViewController.xib in Resources */,
 				896E5E481B9D2A3F008F7A2F /* LCHomeTopItem.xib in Resources */,
+				897BC51D1BA91C0C0079B412 /* LCMapViewController.xib in Resources */,
 				896E5E621B9D3D73008F7A2F /* sorts.plist in Resources */,
 				896E5E7A1B9D7D3F008F7A2F /* LCCityViewController.xib in Resources */,
 				896E5E531B9D3375008F7A2F /* LCHomeDropView.xib in Resources */,
@@ -1113,6 +1148,7 @@
 				89AC76DF1B9FCAB8000B7B6C /* UIView+WebCacheOperation.m in Sources */,
 				89AC76D61B9FCAB8000B7B6C /* SDWebImageDownloaderOperation.m in Sources */,
 				896E5E351B9D25E1008F7A2F /* View+MASAdditions.m in Sources */,
+				897BC5201BA948810079B412 /* LCBusiness.m in Sources */,
 				896E5E811B9D85DB008F7A2F /* LCRegion.m in Sources */,
 				89AC77011BA007F4000B7B6C /* MJRefreshFooterView.m in Sources */,
 				89011DC41BA0256400612B20 /* LCDealsViewController.m in Sources */,
@@ -1133,6 +1169,7 @@
 				897BC5111BA90FBD0079B412 /* NSString+SBJSON.m in Sources */,
 				896E5E7E1B9D8523008F7A2F /* LCCity.m in Sources */,
 				8903E0D11B9EB1A7000B612C /* LCTool.m in Sources */,
+				897BC5241BA94A5A0079B412 /* LCDealAnnotation.m in Sources */,
 				896E5E311B9D25E1008F7A2F /* MASViewAttribute.m in Sources */,
 				896E5E2D1B9D25E1008F7A2F /* MASCompositeConstraint.m in Sources */,
 				897BC50E1BA90FBD0079B412 /* AlixPayOrder.m in Sources */,
@@ -1189,6 +1226,7 @@
 				896E5DF51B9D2515008F7A2F /* UIButton+WF.m in Sources */,
 				896E5DF71B9D2515008F7A2F /* UIScreen+WF.m in Sources */,
 				89AC76D11B9FCAB8000B7B6C /* NSData+ImageContentType.m in Sources */,
+				897BC51C1BA91C0C0079B412 /* LCMapViewController.m in Sources */,
 				89DA60DB1B9E80E2000122C3 /* LCSearchResultTableViewController.m in Sources */,
 				89AC76DA1B9FCAB8000B7B6C /* UIImage+GIF.m in Sources */,
 				896E5E841B9D889D008F7A2F /* LCcityGroup.m in Sources */,
@@ -1314,22 +1352,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B2A96ADD36E83667B401D71 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)armv7",
-					armv7s,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/美团HD/PrefixHeader.pch";
 				INFOPLIST_FILE = "美团HD/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/美团HD/alipay",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1337,18 +1374,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 64EC01AE358B463B8D751E0D /* Pods.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/美团HD/PrefixHeader.pch";
 				INFOPLIST_FILE = "美团HD/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/美团HD/alipay",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv64 armv7 armv7s";
 			};
 			name = Release;
 		};

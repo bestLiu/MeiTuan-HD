@@ -40,6 +40,9 @@
 
 @property (nonatomic, strong) LCRestrictions *restrictions;
 
+@property (nonatomic, strong) NSArray *businesses;
+@property (nonatomic, strong) NSArray *categories;
+
 @property (nonatomic, assign, getter=isediting) BOOL editing;
 
 @property (nonatomic, assign, getter=ischecking) BOOL checking;

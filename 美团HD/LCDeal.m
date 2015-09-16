@@ -8,6 +8,7 @@
 
 #import "LCDeal.h"
 #import "MJExtension.h"
+#import "LCBusiness.h"
 
 @implementation LCDeal
 
@@ -16,6 +17,16 @@
     return @{@"desc" : @"description"};
 }
 
+
+- (NSDictionary *)objectClassInArray
+{
+    return @{@"businesses" : [LCBusiness class]};
+}
+
+- (BOOL)isEqual:(LCDeal *)other
+{
+    return [self.deal_id isEqual:other.deal_id];
+}
 
 MJCodingImplementation;
 
