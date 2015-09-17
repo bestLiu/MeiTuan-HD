@@ -638,8 +638,6 @@
 		896E5E4D1B9D32CB008F7A2F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				89011DC21BA0256400612B20 /* LCDealsViewController.h */,
-				89011DC31BA0256400612B20 /* LCDealsViewController.m */,
 				89D0FCF51B9C3B3A00731253 /* LCHomeCollectionViewController.h */,
 				89D0FCF61B9C3B3A00731253 /* LCHomeCollectionViewController.m */,
 				896E5E541B9D3A32008F7A2F /* LCCategoryViewController.h */,
@@ -694,13 +692,15 @@
 			name = "City 【 城市】";
 			sourceTree = "<group>";
 		};
-		896E5E851B9D94FA008F7A2F /* BaseNavgaiton */ = {
+		896E5E851B9D94FA008F7A2F /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
+				89011DC21BA0256400612B20 /* LCDealsViewController.h */,
+				89011DC31BA0256400612B20 /* LCDealsViewController.m */,
 				89D0FCF81B9C3CAE00731253 /* LCNavigationViewController.h */,
 				89D0FCF91B9C3CAE00731253 /* LCNavigationViewController.m */,
 			);
-			name = BaseNavgaiton;
+			name = BaseViewController;
 			sourceTree = "<group>";
 		};
 		897A4DBA1BA678AE005E2B4F /* fmdb */ = {
@@ -927,7 +927,7 @@
 		89D0FCFE1B9C404600731253 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				896E5E851B9D94FA008F7A2F /* BaseNavgaiton */,
+				896E5E851B9D94FA008F7A2F /* BaseViewController */,
 				896E5DFB1B9D2524008F7A2F /* Libs */,
 				89DA60D41B9E77C5000122C3 /* Model */,
 				89D0FCFF1B9C405F00731253 /* Tools */,

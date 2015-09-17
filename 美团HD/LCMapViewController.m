@@ -63,15 +63,23 @@
     
     self.navigationItem.leftBarButtonItems = @[backItem,categoryItem];
     
-    if ([[UIDevice currentDevice].systemVersion doubleValue]>=8.0) {
+    
+    //请求跟踪
+    if(![CLLocationManager locationServicesEnabled]||[CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedWhenInUse)
+    {
         [self.manager requestWhenInUseAuthorization];
     }
+
+    
+//    if ([[UIDevice currentDevice].systemVersion doubleValue]>=8.0) {
+//        [self.manager requestWhenInUseAuthorization];
+//    }
     
     //设置地图跟踪用户的位置
     self.mapView.userTrackingMode = MKUserTrackingModeFollow;
     
     //标准地图
-//    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.mapType = MKMapTypeStandard;
     
     //设置代理
     self.mapView.delegate = self;
@@ -129,7 +137,7 @@
     userLocation.title = @"不是当前位置";
     userLocation.subtitle = @"才怪";
     //让地图显示用户所在位置
-    MKCoordinateSpan span = MKCoordinateSpanMake(0.25, 0.25);//地图经纬度跨度，跨度越小，地图显示的位置越好。
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);//地图经纬度跨度，跨度越小，地图显示的位置越好。
     MKCoordinateRegion region = MKCoordinateRegionMake(userLocation.location.coordinate, span);
     [mapView setRegion:region];
     

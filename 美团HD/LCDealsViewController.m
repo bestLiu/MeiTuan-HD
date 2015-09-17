@@ -31,7 +31,7 @@
 static NSString * const reuseIdentifier = @"deal";
 - (instancetype)init
 {
-    //    self.collectionView.autoresizingMask = UIViewAutoresizingNone;
+//    self.collectionView.autoresizingMask = UIViewAutoresizingNone;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     // cell的大小
     layout.itemSize = CGSizeMake(305, 305);
