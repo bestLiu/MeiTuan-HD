@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31D6FBBEF3EC83268B7CB007 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA98DF2005D356FFAD0A1E82 /* libPods.a */; };
 		89011DBD1BA010AC00612B20 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 89011DB71BA010AC00612B20 /* LICENSE.txt */; };
 		89011DBE1BA010AC00612B20 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 89011DB81BA010AC00612B20 /* README.md */; };
 		89011DBF1BA010AC00612B20 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 89011DBA1BA010AC00612B20 /* SVProgressHUD.bundle */; };
@@ -148,8 +147,6 @@
 
 /* Begin PBXFileReference section */
 		40626A601BA201E30023B6A4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		5B2A96ADD36E83667B401D71 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		64EC01AE358B463B8D751E0D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		89011DB71BA010AC00612B20 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		89011DB81BA010AC00612B20 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		89011DBA1BA010AC00612B20 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
@@ -411,7 +408,6 @@
 				897BC5161BA90FBD0079B412 /* libcrypto.a in Frameworks */,
 				897BC5171BA90FBD0079B412 /* libssl.a in Frameworks */,
 				897A4DD31BA6B02F005E2B4F /* libsqlite3.dylib in Frameworks */,
-				31D6FBBEF3EC83268B7CB007 /* libPods.a in Frameworks */,
 				897BC50D1BA90FBD0079B412 /* AlixPaylib_arc.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,15 +440,6 @@
 				CA98DF2005D356FFAD0A1E82 /* libPods.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		7AE3B8422EAAEA2425228CE8 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5B2A96ADD36E83667B401D71 /* Pods.debug.xcconfig */,
-				64EC01AE358B463B8D751E0D /* Pods.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		89011DB61BA010AC00612B20 /* SVProgressHUD */ = {
@@ -871,7 +858,6 @@
 				89D0FCCE1B9C35D900731253 /* 美团HD */,
 				89D0FCE81B9C35D900731253 /* 美团HDTests */,
 				89D0FCCD1B9C35D900731253 /* Products */,
-				7AE3B8422EAAEA2425228CE8 /* Pods */,
 				5FC13C9C66E28F5A64626A0C /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -998,11 +984,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89D0FCEF1B9C35D900731253 /* Build configuration list for PBXNativeTarget "美团HD" */;
 			buildPhases = (
-				46249B82D4529D4C5ED4019A /* Check Pods Manifest.lock */,
 				89D0FCC81B9C35D900731253 /* Sources */,
 				89D0FCC91B9C35D900731253 /* Frameworks */,
 				89D0FCCA1B9C35D900731253 /* Resources */,
-				C4F32D20C6352D0F84DBBB36 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1101,39 +1085,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		46249B82D4529D4C5ED4019A /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C4F32D20C6352D0F84DBBB36 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		89D0FCC81B9C35D900731253 /* Sources */ = {
@@ -1350,15 +1301,15 @@
 		};
 		89D0FCF01B9C35D900731253 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B2A96ADD36E83667B401D71 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/美团HD/PrefixHeader.pch";
 				INFOPLIST_FILE = "美团HD/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1372,15 +1323,15 @@
 		};
 		89D0FCF11B9C35D900731253 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64EC01AE358B463B8D751E0D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/美团HD/PrefixHeader.pch";
 				INFOPLIST_FILE = "美团HD/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
