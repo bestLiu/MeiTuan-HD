@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "LCHomeCollectionViewController.h"
 #import "LCNavigationViewController.h"
-#include "AFNetworking.h"
 #import "AlixPayResult.h"
 #import "DataVerifier.h"
 #import "PartnerConfig.h"

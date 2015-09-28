@@ -59,6 +59,7 @@
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     fmt.dateFormat = @"yyyy-MM-dd";
     NSDate *dead = [fmt dateFromString:self.deal.purchase_deadline];
+    
     // 追加1天
     dead = [dead dateByAddingTimeInterval:24 * 60 * 60];
     NSDate *now = [NSDate date];

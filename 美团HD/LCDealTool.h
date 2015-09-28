@@ -14,19 +14,11 @@
  *  返回第page页的团购数据:page从1开始
  */
 + (NSArray *)collectDeals:(int)page;
+
 + (int)collectDealsCount;
 
 /**
- *  最近团购数据
- */
-//+ (NSArray *)recentDeals:(int)page;
-
-
-
-/**
  *  收藏一个团购
- *
- *  @param deal
  */
 + (void)addCollect:(LCDeal *)deal;
 
@@ -37,7 +29,14 @@
 //是否收藏
 + (BOOL)isCollect:(LCDeal *)deal;
 
-// *  收藏一个团购
-//+ (void)addCollect:(LCDeal *)deal;
+
+
+
+
+
+/**
+ *  最近团购数据
+ */
+//+ (NSArray *)recentDeals:(int)page;
 
 @end
