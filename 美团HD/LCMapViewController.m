@@ -187,16 +187,17 @@
     // 返回nil 表示是刚开始蓝色的大头针
     if (![annotation isKindOfClass:[LCDealAnnotation class]]) return nil;
     
-    MKAnnotationView *annoView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"deal"];
+    MKPinAnnotationView *annoView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"deal"];
     if (annoView == nil) {
-        annoView = [[MKAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@"deal"];
+        annoView = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@"deal"];
     }
     //设置模型(位置、标题、子标题)
     annoView.annotation = annotation;
     
+    annoView.animatesDrop = YES;
     //设置图片
-    annoView.image = [UIImage imageNamed:annotation.icon];
-    annoView.canShowCallout = YES;
+//    annoView.image = [UIImage imageNamed:annotation.icon];
+//    annoView.canShowCallout = YES;
     
     return annoView;
 }
