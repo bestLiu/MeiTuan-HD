@@ -137,7 +137,7 @@
     userLocation.title = @"不是当前位置";
     userLocation.subtitle = @"才怪";
     //让地图显示用户所在位置
-    MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);//地图经纬度跨度，跨度越小，地图显示的位置越好。
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.05, 0.05);//地图经纬度跨度，跨度越小，地图显示的位置越好。
     MKCoordinateRegion region = MKCoordinateRegionMake(userLocation.location.coordinate, span);
     [mapView setRegion:region];
     
@@ -187,45 +187,20 @@
     // 返回nil 表示是刚开始蓝色的大头针
     if (![annotation isKindOfClass:[LCDealAnnotation class]]) return nil;
     
+//    MKPinAnnotationView : MKAnnotationView
     MKPinAnnotationView *annoView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"deal"];
     if (annoView == nil) {
         annoView = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@"deal"];
     }
     //设置模型(位置、标题、子标题)
     annoView.annotation = annotation;
-    
     annoView.animatesDrop = YES;
     //设置图片
-//    annoView.image = [UIImage imageNamed:annotation.icon];
-//    annoView.canShowCallout = YES;
+    annoView.image = [UIImage imageNamed:annotation.icon];
+    annoView.canShowCallout = YES;
+    annoView.pinTintColor = [UIColor redColor];
     
     return annoView;
-}
-
-#pragma mark - CLLocationManagerDelegate
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-//    CLLocation *location = [locations firstObject];
-//    
-//    [self.coder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-//        if (error || placemarks.count == 0) return;
-//        
-//        CLPlacemark *pm = [placemarks firstObject];
-//        NSLog(@"地理反编码--->>> %@---%@",pm.locality,pm.addressDictionary);
-//        NSString *urlString = @"v1/deal/find_deals";
-//        DPAPI *api = [[DPAPI alloc] init];
-//        NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//        NSString *city = pm.locality ? pm.locality : pm.addressDictionary[@"state"];
-//        city = [city substringToIndex:city.length - 1];
-//        params[@"city"] = @"成都";
-//        params[@"latitude"] = @(location.coordinate.latitude);
-//        params[@"longitude"] = @(location.coordinate.longitude);
-//        params[@"radius"] = @(5000);
-//        
-//        [api requestWithURL:urlString params:params delegate:self];
-//        
-//    }];
-
 }
 
 

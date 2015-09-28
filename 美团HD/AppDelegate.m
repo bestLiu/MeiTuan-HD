@@ -30,7 +30,6 @@
     LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:homeVc];
     
     [self.window setRootViewController:nav];
-    
     [self.window makeKeyAndVisible];
     return YES;
 }
