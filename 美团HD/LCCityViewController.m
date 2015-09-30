@@ -10,7 +10,7 @@
 #import "UIBarButtonItem+Extension.h"
 #import "LCCity.h"
 #import "MJExtension.h"
-#import "LCcityGroup.h"
+#import "LCCityGroup.h"
 #import "UIView+AutoLayout.h"
 #import "LCSearchResultTableViewController.h"
 
@@ -60,7 +60,7 @@
     [_coverView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.searchBar withOffset:10];
     
     //加载城市数据
-    self.cityGroups = [LCcityGroup objectArrayWithFilename:@"cityGroups.plist"];
+    self.cityGroups = [LCCityGroup objectArrayWithFilename:@"cityGroups.plist"];
     self.searchBar.tintColor = [UIColor colorWithRed:32/255.0 green:191/255.0 blue:179/255.0 alpha:1];//设置searchBar光标和取消按钮的颜色
 }
 
@@ -76,7 +76,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    LCcityGroup *group = self.cityGroups[section];
+    LCCityGroup *group = self.cityGroups[section];
     return group.cities.count;
 }
 
@@ -87,7 +87,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
-    LCcityGroup *group = self.cityGroups[indexPath.section];
+    LCCityGroup *group = self.cityGroups[indexPath.section];
     
     cell.textLabel.text = group.cities[indexPath.row];
     
@@ -98,13 +98,13 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    LCcityGroup *group = self.cityGroups[section];
+    LCCityGroup *group = self.cityGroups[section];
     return group.title;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    LCcityGroup *group = self.cityGroups[indexPath.section];
+    LCCityGroup *group = self.cityGroups[indexPath.section];
     NSString *cityName = group.cities[indexPath.row];
      [LCNotifiCationCenter postNotificationName:LCCityDidSelectNotification object:self userInfo:@{LCCitySelectCityKey:cityName}];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -114,7 +114,7 @@
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
 //    NSMutableArray *titles = [NSMutableArray array];
-//    for (LCcityGroup *group in self.cityGroups) {
+//    for (LCCityGroup *group in self.cityGroups) {
 //        [titles addObject:group.title];
 //    }
     

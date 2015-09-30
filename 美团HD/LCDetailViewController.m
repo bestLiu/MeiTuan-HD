@@ -9,7 +9,7 @@
 #import "LCDetailViewController.h"
 #import "DPAPI.h"
 #import "MJExtension.h"
-#import "SVProgressHUD.h"
+#import "MBProgressHUD+LC.h"
 #import "LCRestrictions.h"
 #import "UIImageView+WebCache.h"
 #import "LCDealTool.h"
@@ -17,8 +17,9 @@
 #import "AlixPayOrder.h"
 #import "DataSigner.h"
 #import "PartnerConfig.h"
+#import "UMSocial.h"
 
-@interface LCDetailViewController () <UIWebViewDelegate, DPRequestDelegate>
+@interface LCDetailViewController () <UIWebViewDelegate, DPRequestDelegate,UMSocialUIDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -81,6 +82,9 @@
     
     // 设置收藏状态
     self.collectButton.selected = [LCDealTool isCollect:self.deal];
+    
+    //配置友盟分享
+    [UMSocialConfig setSupportedInterfaceOrientations:UIInterfaceOrientationMaskLandscape];
 }
 
 /**
@@ -103,7 +107,8 @@
 
 - (void)request:(DPRequest *)request didFailWithError:(NSError *)error
 {
-    [SVProgressHUD showErrorWithStatus:@"网络繁忙,请稍后再试"];
+    [MBProgressHUD showError:@"网络繁忙,请稍后再试" toView:self.view];
+    //[SVProgressHUD showErrorWithStatus:@"网络繁忙,请稍后再试"];
 }
 
 #pragma mark - UIWebViewDelegate
@@ -184,12 +189,12 @@
 
     if (self.collectButton.isSelected) { // 取消收藏
         [LCDealTool removeCollect:self.deal];
-        [SVProgressHUD showSuccessWithStatus:@"取消收藏成功"];
+        [MBProgressHUD showSuccess:@"取消收藏成功" toView:self.view];
         
         info[LCIsCollectKey] = @NO;
     } else { // 收藏
         [LCDealTool addCollect:self.deal];
-        [SVProgressHUD showSuccessWithStatus:@"收藏成功"];
+        [MBProgressHUD showSuccess:@"收藏成功" toView:self.view];
         
         info[LCIsCollectKey] = @YES;
     }
@@ -202,6 +207,13 @@
 }
 
 - (IBAction)share {
+    
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"560b44a5e0f55a5eaa00297e"
+                                      shareText:@"请输入你要分享的文字"
+                                     shareImage:self.headImageView.image
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToRenren,UMShareToDouban,UMShareToQzone,nil]
+                                       delegate:self];
     
 }
 @end

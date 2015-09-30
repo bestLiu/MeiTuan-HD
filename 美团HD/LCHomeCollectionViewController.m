@@ -25,8 +25,14 @@
 #import "LCRecentViewController.h"
 #import "LCCollectViewController.h"
 #import "LCMapViewController.h"
+#import "MBProgessHUD/MBProgressHUD+LC.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface LCHomeCollectionViewController ()<AwesomeMenuDelegate>
+@interface LCHomeCollectionViewController ()<AwesomeMenuDelegate,CLLocationManagerDelegate,UIAlertViewDelegate>
+{
+    CLLocationManager *_locationManager;
+}
+
 
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
 @property (nonatomic, weak) UIBarButtonItem *districtItem;
@@ -35,6 +41,7 @@
 @property (nonatomic, copy) NSString *selectedCityName;
 @property (nonatomic, copy) NSString *selectedCategoryName;
 @property (nonatomic, copy) NSString *selectedRegionName;
+
 @property (nonatomic, strong) LCSort *selectedSort;
 
 @property (nonatomic, strong) UIPopoverController *sortPopover;
@@ -42,8 +49,8 @@
 @property (nonatomic, strong) UIPopoverController *regionPopover;
 @property (nonatomic, assign) int page;
 
-
-
+@property (nonatomic, strong) CLGeocoder *geocoder;
+@property (nonatomic, copy) NSString *locationCityName;
 
 
 @end
@@ -56,6 +63,13 @@
         [self setupNotificaion];
 }
 
+- (CLGeocoder *)geocoder
+{
+    if (!_geocoder) {
+        self.geocoder = [[CLGeocoder alloc] init];
+    }
+    return _geocoder;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -66,11 +80,31 @@
     
     //创建AweSomeMenu
     [self setAwesomeMenu];
+    
+    //开启定位
+    [self setupLocation];
+    
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [LCNotifiCationCenter removeObserver:self];
+}
+
+- (void)setupLocation
+{
+    [MBProgressHUD showMessage:@"正在获取位置信息请稍候..." toView:self.view];
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    //设置定位精度
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    //定位频率,每隔多少米定位一次
+    CLLocationDistance distance = 1000.0;//1000米定位一次
+    _locationManager.distanceFilter=distance;
+    //启动跟踪定位
+    [_locationManager startUpdatingLocation];
+    _geocoder = [[CLGeocoder alloc] init];
+
 }
 
 - (void)setupNotificaion
@@ -88,6 +122,7 @@
     //监听区域改变
     [LCNotifiCationCenter addObserver:self selector:@selector(regionChange:) name:LCRegionDidChangeNotification object:nil];
 }
+
 - (void)setAwesomeMenu
 {
     // 1.中间的item
@@ -118,7 +153,6 @@
     [menu autoSetDimensionsToSize:CGSizeMake(200, 200)];//设置尺寸
 }
 
-
 - (void)setupLeftNav
 {
     // 1、logo
@@ -127,12 +161,15 @@
     
     //2、类别
     LCHomeTopItem *categoryTopItem = [LCHomeTopItem item];
+    [categoryTopItem setTitle:@"全部分类"];
+    [categoryTopItem setIcon:@"icon_category_-1" highlightIcon:@"icon_category_highlighted_-1"];
     [categoryTopItem addTarget:self action:@selector(categoryClick)];
     UIBarButtonItem *categoryItem = [[UIBarButtonItem alloc] initWithCustomView:categoryTopItem];
     self.categoryItem = categoryItem;
     
     //3、地区
     LCHomeTopItem *districtTopItem = [LCHomeTopItem item];
+    [districtTopItem setTitle:@"城市"];
     [districtTopItem addTarget:self action:@selector(districtClick)];
     UIBarButtonItem *districtItem = [[UIBarButtonItem alloc] initWithCustomView:districtTopItem];
     self.districtItem = districtItem;
@@ -140,6 +177,7 @@
     //4、排序
     LCHomeTopItem *sortTopItem = [LCHomeTopItem item];
     [sortTopItem setTitle:@"排序"];
+    [sortTopItem setSubtitle:@"默认排序"];
     [sortTopItem setIcon:@"icon_sort" highlightIcon:@"icon_sort_highlighted"];
     [sortTopItem addTarget:self action:@selector(sortClick)];
     UIBarButtonItem *sortItem = [[UIBarButtonItem alloc] initWithCustomView:sortTopItem];
@@ -160,6 +198,10 @@
 - (void)categoryClick
 {
     //显示分类菜单
+    if (!self.selectedCityName) {
+        [MBProgressHUD showError:@"请先选择城市" toView:self.view];
+        return;
+    }
     UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[[LCCategoryViewController alloc] init]];
     [popover presentPopoverFromBarButtonItem:self.categoryItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     self.categoryPopover = popover;
@@ -203,7 +245,7 @@
         LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:searchController];
         [self presentViewController:nav animated:YES completion:nil];
     }else{
-        [SVProgressHUD showErrorWithStatus:@"请选择城市"];
+        [MBProgressHUD showError:@"请选择城市" toView:self.view];
     }
     
 }
@@ -354,6 +396,47 @@
             
         default:
             break;
+    }
+}
+
+#pragma mark 跟踪定位代理方法，每次位置发生变化即会执行（只要定位到相应位置）
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location = [locations lastObject];//取出第一个位置
+    CLLocationCoordinate2D coordinate = location.coordinate;//位置坐标
+    [_locationManager stopUpdatingLocation];
+    [self getAddressByLatitude:coordinate.latitude longitude:coordinate.longitude];
+    
+
+ }
+#pragma mark 地理反编码
+-(void)getAddressByLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude
+{
+    //反地理编码
+    CLLocation *location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
+    [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        CLPlacemark *placemark=[placemarks firstObject];
+        if (placemark) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            self.locationCityName = placemark.locality ? placemark.locality : placemark.addressDictionary[@"State"];
+        }else{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD showError:@"网络繁忙，请稍候再试" toView:self.view];
+            return;
+        }
+        
+        NSString *msg = [NSString stringWithFormat:@"定位到当前位置：%@是否切换?",_locationCityName];
+        [[[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"取消", nil] show];
+    }];
+}
+
+#pragma mark -UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        //去掉直辖城市后面的“市”
+        NSString *cityName = [self.locationCityName containsString:@"市"]?[_locationCityName substringWithRange:NSMakeRange(0, _locationCityName.length - 1)]:self.locationCityName;
+        [LCNotifiCationCenter postNotificationName:LCCityDidSelectNotification object:self userInfo:@{LCCitySelectCityKey:cityName}];
     }
 }
 

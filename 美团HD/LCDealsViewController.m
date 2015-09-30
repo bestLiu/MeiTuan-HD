@@ -12,7 +12,7 @@
 #import "LCDealCell.h"
 #import "UIView+AutoLayout.h"
 #import "UIView+Extension.h"
-#import "SVProgressHUD.h"
+#import "MBProgessHUD/MBProgressHUD+LC.h"
 #import "MJExtension.h"
 #import "LCDetailViewController.h"
 
@@ -107,7 +107,7 @@ static NSString * const reuseIdentifier = @"deal";
     //请求失败
     NSLog(@"请求失败--->>> %@",error);
     // 提醒用户失败
-    [SVProgressHUD showErrorWithStatus:@"网络错误,请稍候再试"];
+    [MBProgressHUD showError:@"网络繁忙，请稍候再试" toView:self.view];
     
     // 结束上/下拉刷新
     [self.collectionView footerEndRefreshing];

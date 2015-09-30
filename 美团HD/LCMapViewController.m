@@ -188,17 +188,17 @@
     if (![annotation isKindOfClass:[LCDealAnnotation class]]) return nil;
     
 //    MKPinAnnotationView : MKAnnotationView
-    MKPinAnnotationView *annoView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"deal"];
+    MKAnnotationView *annoView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"deal"];
     if (annoView == nil) {
-        annoView = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@"deal"];
+        annoView = [[MKAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@"deal"];
     }
     //设置模型(位置、标题、子标题)
     annoView.annotation = annotation;
-    annoView.animatesDrop = YES;
+//    annoView.animatesDrop = YES;
     //设置图片
     annoView.image = [UIImage imageNamed:annotation.icon];
     annoView.canShowCallout = YES;
-    annoView.pinTintColor = [UIColor redColor];
+//    annoView.pinTintColor = [UIColor redColor];
     
     return annoView;
 }

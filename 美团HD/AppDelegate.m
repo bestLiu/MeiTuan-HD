@@ -12,6 +12,7 @@
 #import "AlixPayResult.h"
 #import "DataVerifier.h"
 #import "PartnerConfig.h"
+#import "UMSocial.h"
 
 
 @interface AppDelegate ()
@@ -22,6 +23,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [UMSocialData setAppKey:@"560b44a5e0f55a5eaa00297e"];
+    
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
     NSString *file = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
