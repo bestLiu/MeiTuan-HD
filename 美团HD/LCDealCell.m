@@ -71,7 +71,7 @@
     //根据模型属性来控制cover的显示和隐藏
     self.coverButton.hidden = !deal.editing;
     
-    //根据模型属性控制打钩的显示与否
+    //根据模型属性控制打勾的显示与否
     self.checkImageView.hidden = !deal.ischecking;
 }
 

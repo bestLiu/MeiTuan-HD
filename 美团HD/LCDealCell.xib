@@ -35,8 +35,8 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="￥108" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svs-aR-Kgo" userLabel="现价">
-                                <rect key="frame" x="0.0" y="75" width="53" height="20"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥108" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svs-aR-Kgo" userLabel="现价">
+                                <rect key="frame" x="0.0" y="75" width="55" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="ybL-yu-J3j"/>
                                 </constraints>
@@ -44,8 +44,8 @@
                                 <color key="textColor" red="0.7843137255" green="0.21176470589999999" blue="0.019607843140000001" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="￥108" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEy-mo-ddb" userLabel="原价" customClass="LCCenterLineLabel">
-                                <rect key="frame" x="58" y="80" width="31" height="15"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥108" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEy-mo-ddb" userLabel="原价" customClass="LCCenterLineLabel">
+                                <rect key="frame" x="60" y="80" width="31" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="7GG-qe-5Ni"/>
                                 </constraints>

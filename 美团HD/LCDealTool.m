@@ -53,8 +53,6 @@ static FMDatabase *_db;
 + (void)removeCollect:(LCDeal *)deal
 {
     [_db executeUpdateWithFormat:@"DELETE FROM t_collect_deal WHERE deal_id = %@;", deal.deal_id];
-
-  //  [_db executeUpdateWithFormat:@"DELETE FROM t_collect_deal WHERE deal_id = %@",deal.deal_id];
 }
 + (BOOL)isCollect:(LCDeal *)deal
 {
@@ -63,6 +61,37 @@ static FMDatabase *_db;
     //#warning 索引从1开始
     return [set intForColumn:@"deal_count"] == 1;
 
+}
+/*---------------------------------------------------分割线--------------------------------------------------------------*/
++ (NSArray *)recentDeals:(int)page
+{
+    int size = 20; //每页20条
+    int pos = (page - 1) * size;
+    FMResultSet *set = [_db executeQueryWithFormat:@"SELECT * FROM t_recent_deal ORDER BY id DESC LIMIT %d,%d;", pos, size];
+    NSMutableArray *deals = [NSMutableArray array];
+    while (set.next) {
+        LCDeal *deal = [NSKeyedUnarchiver unarchiveObjectWithData:[set objectForColumnName:@"deal"]];
+        [deals addObject:deal];
+    }
+    return deals;
+}
++ (void)addRecent:(LCDeal *)deal
+{
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:deal];
+    [_db executeUpdateWithFormat:@"INSERT INTO t_recent_deal(deal, deal_id) VALUES(%@, %@);", data, deal.deal_id];
+
+}
++ (void)removeRecent:(LCDeal *)deal
+{
+    [_db executeUpdateWithFormat:@"DELETE FROM t_recent_deal WHERE deal_id = %@;", deal.deal_id];
+}
+
++ (BOOL)recentIsExist:(LCDeal *)deal
+{
+    FMResultSet *set = [_db executeQueryWithFormat:@"SELECT count(*) AS deal_count FROM t_recent_deal WHERE deal_id = %@;", deal.deal_id];
+    [set next];
+    //#warning 索引从1开始
+    return [set intForColumn:@"deal_count"] == 1;
 }
 
 @end

@@ -113,7 +113,7 @@ static NSString * const reuseIdentifier = @"deal";
     // 监听收藏状态改变的通知
     [LCNotifiCationCenter addObserver:self selector:@selector(collectStateChange:) name:LCCollectStateDidChangeNotification object:nil];
     
-    // 添加上啦加载
+    // 添加上拉刷新(有时候收藏很多，一页显示不过来)
     [self.collectionView addFooterWithTarget:self action:@selector(loadMoreDeals)];
     
     // 设置导航栏内容

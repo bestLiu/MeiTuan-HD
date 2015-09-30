@@ -18,6 +18,7 @@
 #import "DataSigner.h"
 #import "PartnerConfig.h"
 #import "UMSocial.h"
+#import "LCDealTool.h"
 
 @interface LCDetailViewController () <UIWebViewDelegate, DPRequestDelegate,UMSocialUIDelegate>
 
@@ -85,6 +86,8 @@
     
     //配置友盟分享
     [UMSocialConfig setSupportedInterfaceOrientations:UIInterfaceOrientationMaskLandscape];
+    //添加最近浏览
+    [LCDealTool addRecent:self.deal];
 }
 
 /**

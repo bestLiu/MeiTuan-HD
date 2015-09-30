@@ -308,7 +308,6 @@
     
     //关闭popvoer
     [self.categoryPopover dismissPopoverAnimated:YES];
-    
 }
 
 - (void)regionChange:(NSNotification *)noti
@@ -406,9 +405,7 @@
     CLLocationCoordinate2D coordinate = location.coordinate;//位置坐标
     [_locationManager stopUpdatingLocation];
     [self getAddressByLatitude:coordinate.latitude longitude:coordinate.longitude];
-    
-
- }
+}
 #pragma mark 地理反编码
 -(void)getAddressByLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude
 {
@@ -424,7 +421,6 @@
             [MBProgressHUD showError:@"网络繁忙，请稍候再试" toView:self.view];
             return;
         }
-        
         NSString *msg = [NSString stringWithFormat:@"定位到当前位置：%@是否切换?",_locationCityName];
         [[[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"取消", nil] show];
     }];

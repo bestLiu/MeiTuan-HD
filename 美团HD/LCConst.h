@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import "SVProgressHUD.h"
 
 #ifdef DEBUG
 #define LCLog(...) NSLog(__VA_ARGS__)
