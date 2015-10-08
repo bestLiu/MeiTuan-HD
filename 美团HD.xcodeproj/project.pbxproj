@@ -986,6 +986,20 @@
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
+		89C3A98A1BC604430087B328 /* PersonalCenter【个人】 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "PersonalCenter【个人】";
+			sourceTree = "<group>";
+		};
+		89C3A98B1BC604720087B328 /* More【更多】 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "More【更多】";
+			sourceTree = "<group>";
+		};
 		89D0FCC31B9C35D900731253 = {
 			isa = PBXGroup;
 			children = (
@@ -1058,6 +1072,8 @@
 				89011DCF1BA0367700612B20 /* Collect 【收藏】 */,
 				89011DD31BA036A400612B20 /* Recent 【最近浏览】 */,
 				897BC5181BA91BDD0079B412 /* Map 【地图】 */,
+				89C3A98A1BC604430087B328 /* PersonalCenter【个人】 */,
+				89C3A98B1BC604720087B328 /* More【更多】 */,
 				89D0FCDC1B9C35D900731253 /* Images.xcassets */,
 			);
 			name = Classes;

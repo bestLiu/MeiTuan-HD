@@ -29,6 +29,7 @@
 @property (nonatomic, weak) UIBarButtonItem *categoryItem;
 @property (nonatomic, copy) NSString *selectedCategoryName;
 @property (nonatomic, strong) DPRequest *lastRequest;
+@property (nonatomic, assign) CLLocationCoordinate2D currentCoordinate;
 
 @end
 
@@ -57,6 +58,8 @@
      UIBarButtonItem *backItem = [UIBarButtonItem itemWithTarget:self action:@selector(back) image:@"icon_back" highImage:@"icon_back_highlighted"];
 
     LCHomeTopItem *categoryTopItem = [LCHomeTopItem item];
+    [categoryTopItem setTitle:@"全部分类"];
+    [categoryTopItem setIcon:@"icon_category_-1" highlightIcon:@"icon_category_highlighted_-1"];
     [categoryTopItem addTarget:self action:@selector(categoryClick)];
     UIBarButtonItem *categoryItem = [[UIBarButtonItem alloc] initWithCustomView:categoryTopItem];
     self.categoryItem = categoryItem;
@@ -136,6 +139,8 @@
 {
     userLocation.title = @"不是当前位置";
     userLocation.subtitle = @"才怪";
+    self.currentCoordinate = userLocation.coordinate;
+    
     //让地图显示用户所在位置
     MKCoordinateSpan span = MKCoordinateSpanMake(0.05, 0.05);//地图经纬度跨度，跨度越小，地图显示的位置越好。
     MKCoordinateRegion region = MKCoordinateRegionMake(userLocation.location.coordinate, span);
@@ -181,11 +186,19 @@
    self.lastRequest = [api requestWithURL:urlString params:params delegate:self];
 }
 
+
+//自定义大头针视图
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(LCDealAnnotation *)annotation
 {
-    NSLog(@"annotation %@",annotation);
-    // 返回nil 表示是刚开始蓝色的大头针
-    if (![annotation isKindOfClass:[LCDealAnnotation class]]) return nil;
+    // 表示是刚开始蓝色的大头针
+    if (![annotation isKindOfClass:[LCDealAnnotation class]]){
+        MKPinAnnotationView *pinAnno = [[MKPinAnnotationView alloc] init];
+        pinAnno.pinTintColor = [UIColor redColor];
+        pinAnno.canShowCallout = YES;
+        pinAnno.animatesDrop = YES;
+        return pinAnno;
+    }
+    
     
 //    MKPinAnnotationView : MKAnnotationView
     MKAnnotationView *annoView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"deal"];
@@ -232,19 +245,16 @@
   
 }
 
-
-
 - (void)request:(DPRequest *)request didFailWithError:(NSError *)error
 {
     
 }
 
-
-
-
-
-
-
+//回到当前位置
+- (IBAction)currentLocationButtonClick:(id)sender
+{
+    [_mapView setCenterCoordinate:self.currentCoordinate animated:YES];
+}
 
 
 - (void)back

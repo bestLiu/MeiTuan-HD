@@ -28,8 +28,7 @@
     
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
-    NSString *file = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSLog(@"Documents路径--->>>%@",file);
+    
     LCHomeCollectionViewController *homeVc = [[LCHomeCollectionViewController alloc] init];
     LCNavigationViewController *nav = [[LCNavigationViewController alloc] initWithRootViewController:homeVc];
     
@@ -38,7 +37,7 @@
     return YES;
 }
 /**
- *  当从其他应用跳转到当前应用时,就会调用这个方法
+ *  当从其他应用跳转到当前应用时,就会调用这个方法,这里用于支付宝
  */
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
